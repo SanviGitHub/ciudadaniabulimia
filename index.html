@@ -1,414 +1,490 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bulimia Nerviosa: Un Análisis Profesional</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
-        :root {
-            --background-dark: #111827;
-            --card-bg: #1F2937;
-            --text-primary: #F9FAFB;
-            --text-secondary: #9CA3AF;
-            --accent-color: #38BDF8;
-            --border-color: #374151;
-            --shadow-color: rgba(0, 0, 0, 0.5);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.8;
-            background-color: var(--background-dark);
-            color: var(--text-primary);
-            margin: 0;
-            padding: 50px 20px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .container {
-            max-width: 950px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            border-radius: 24px;
-            box-shadow: 0 25px 50px -12px var(--shadow-color);
-            padding: clamp(30px, 6vw, 70px);
-            border: 1px solid var(--border-color);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 1s ease-out forwards;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
+    <title>Hablemos de Bulimia | Exposición de Ciudadanía</title>
+    <meta name="description" content="Una página informativa y de concientización sobre la bulimia, creada para una exposición escolar.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuración de Tailwind (CORREGIDO) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'display': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'background': '#F8F9FA', // Gris muy suave
+                        'surface': '#FFFFFF', // Blanco
+                        'primary': '#111827', // Gris oscuro casi negro
+                        'secondary': '#6B7280', // Gris para textos secundarios
+                        'accent': '#38bdf8', // Azul cielo sereno
+                        'accent-hover': '#0ea5e9', // Tono más oscuro para hover
+                    }
+                }
             }
         }
+    </script>
+    
+    <!-- Google Fonts: Inter y Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
 
-        header {
-            text-align: center;
-            margin-bottom: 70px;
-        }
-
-        header h1 {
-            font-size: clamp(2.8rem, 8vw, 4rem);
-            font-weight: 800;
-            color: var(--text-primary);
-            letter-spacing: -2.5px;
-            margin: 0;
-            line-height: 1.1;
-            background: -webkit-linear-gradient(45deg, var(--accent-color), #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        header p {
-            font-size: 1.4rem;
-            color: var(--text-secondary);
-            margin-top: 15px;
-            font-weight: 300;
-        }
-
-        section {
-            margin-bottom: 60px;
+    <!-- Estilos personalizados y configuración de Tailwind -->
+    <style>
+        /* Animación para el scroll reveal */
+        .reveal {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.6, 0.2, 0.4, 1), transform 0.8s cubic-bezier(0.6, 0.2, 0.4, 1);
         }
-        
-        section.visible {
+        .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 40px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-        }
+        /* Estilo para la barra de scroll */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F8F9FA; }
+        ::-webkit-scrollbar-thumb { background-color: #d1d5db; border-radius: 20px; }
         
-        h2 .icon {
-            margin-right: 15px;
-            color: var(--accent-color);
-            width: 40px;
-            height: 40px;
-            flex-shrink: 0;
-        }
+        /* --- NUEVOS ESTILOS Y ANIMACIONES --- */
+        #header { transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out; }
+        #header.scrolled { background-color: rgba(255, 255, 255, 0.8); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07); }
+        .cta-glow:hover { box-shadow: 0 0 20px 0 rgba(56, 189, 248, 0.6); }
+        .info-card { transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; }
+        .info-card:hover { transform: translateY(-8px); box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1); }
+        .hero-title span { display: inline-block; opacity: 0; transform: translateY(25px); animation: fadeIn-up 0.8s cubic-bezier(0.6, 0.2, 0.4, 1) forwards; }
+        @keyframes fadeIn-up { to { opacity: 1; transform: translateY(0); } }
 
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
+        /* --- LOADER STYLES --- */
+        #loader-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #1f2937; display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s ease-out; overflow: hidden; }
+        #rain-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        #loader-wrapper.hidden { opacity: 0; pointer-events: none; }
+        .loader-content { text-align: center; z-index: 1; }
+        .loader-text { color: #F8F9FA; font-size: 1.5rem; margin-bottom: 1rem; }
+        .loader-bar-container { width: 250px; height: 6px; background-color: #4b5563; border-radius: 3px; overflow: hidden; }
+        .loader-bar { width: 0; height: 100%; background-color: #38bdf8; border-radius: 3px; animation: loading-animation 1.5s ease-out forwards; }
+        @keyframes loading-animation { from { width: 0%; } to { width: 100%; } }
 
-        li {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid transparent;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-        
-        li:hover {
-            background-color: #2a3647;
-            border-color: var(--accent-color);
-        }
-
-        li .icon {
-            flex-shrink: 0;
-            margin-right: 20px;
-            width: 28px;
-            height: 28px;
-            color: var(--accent-color);
-            margin-top: 3px;
-        }
-        
-        li strong {
-            color: var(--text-primary);
-            font-weight: 600;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        p {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            line-height: 1.9;
-        }
-        
-        .cycle-container {
-            display: flex;
-            text-align: center;
-            margin-top: 30px;
-            flex-direction: column;
-            align-items: center;
-            gap: 4rem;
-        }
-        
-        .cycle-step {
-            width: 150px;
-            position: relative;
-        }
-        
-        .cycle-step:not(:last-child)::after {
-            content: '↓';
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            position: absolute;
-            bottom: -3.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .cycle-icon-wrapper {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 15px auto;
-            background-color: #2a3647;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid var(--border-color);
-        }
-
-        .cycle-icon-wrapper .icon {
-            width: 40px;
-            height: 40px;
-            color: var(--accent-color);
-        }
-        
-        .btn-container {
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background-color: var(--accent-color);
-            color: var(--background-dark);
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 12px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 60px;
-            padding-top: 30px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        footer p {
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-        }
-
-        #loader-wrapper {
+        /* --- ESTILOS CONTROL DE VOLUMEN (TEMA OSCURO) --- */
+        #volume-control {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--background-dark);
+            bottom: 1rem;
+            right: 1rem;
             display: flex;
-            justify-content: center;
             align-items: center;
-            z-index: 9999;
+            gap: 0.5rem;
+            background-color: rgba(31, 41, 55, 0.8); /* Fondo oscuro semi-transparente */
+            padding: 0.5rem;
+            border-radius: 9999px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
         }
-
-        .loader-content {
-            text-align: center;
+        #volume-slider {
+            width: 0px;
+            opacity: 0;
+            transition: width 0.3s ease, opacity 0.3s ease;
+            -webkit-appearance: none;
+            background: transparent;
         }
-
-        .loader-logo {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 20px;
+        #volume-control:hover #volume-slider {
+            width: 80px;
+            opacity: 1;
         }
-
-        .loader-bar-container {
-            width: 300px;
-            height: 8px;
-            background-color: var(--border-color);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .loader-bar {
-            width: 0;
-            height: 100%;
-            background-color: var(--accent-color);
-            border-radius: 4px;
-            animation: loading-animation 2.5s ease-out forwards;
-        }
-
-        @keyframes loading-animation {
-            from { width: 0%; }
-            to { width: 100%; }
-        }
-
-        @media (min-width: 821px) {
-            .cycle-container {
-                flex-direction: row;
-                justify-content: center;
-                align-items: flex-start;
-                gap: 5rem;
-            }
-            .cycle-step:not(:last-child)::after {
-                content: '→';
-                bottom: auto;
-                top: 25px;
-                left: auto;
-                right: -4rem;
-                transform: none;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            body { padding: 20px 10px; }
-            .container { padding: 40px 30px; } 
-            header h1 { font-size: 2.5rem; } 
-            header p { font-size: 1.2rem; }
-            h2 { font-size: 2rem; }
+        #volume-slider::-webkit-slider-runnable-track { height: 4px; background: #6B7280; border-radius: 2px; } /* Pista de la barra en gris oscuro */
+        #volume-slider::-webkit-slider-thumb { -webkit-appearance: none; margin-top: -4px; height: 12px; width: 12px; background: #38bdf8; border-radius: 50%; cursor: pointer; }
+        #volume-button { 
+            cursor: pointer;
+            color: #F8F9FA; /* Icono en color claro para contraste */
         }
     </style>
 </head>
-<body>
+<body class="bg-background text-primary antialiased">
 
+    <!-- ===== LOADER ===== -->
     <div id="loader-wrapper">
+        <canvas id="rain-canvas"></canvas>
         <div class="loader-content">
-            <div class="loader-logo">Sanvy Corporation</div>
+            <p class="loader-text font-display">Sanvy corporation</p>
             <div class="loader-bar-container">
                 <div class="loader-bar"></div>
             </div>
         </div>
+        <audio id="lofi-music">
+            <source src="music.mp3" type="audio/mpeg">
+        </audio>
     </div>
 
-    <div class="container" style="display: none;">
-        <header>
-            <h1>Bulimia Nerviosa</h1>
-            <p>Una mirada exhaustiva a un complejo trastorno alimenticio</p>
-        </header>
-
-        <main>
-            <section id="caracteristicas">
-                <h2><svg class="icon" xmlns="http://www.w.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>Características Clave</h2>
-                <ul>
-                    <li><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg><div><strong>Episodios Recurrentes de Atracones:</strong> Consumo rápido y descontrolado de una cantidad de alimentos muy superior a la normal, generando una intensa sensación de malestar y culpa.</div></li>
-                    <li><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0011.667 0l3.181-3.183m-4.991-2.691V5.25a3.375 3.375 0 00-3.375-3.375H8.25a3.375 3.375 0 00-3.375 3.375v3.192" /></svg><div><strong>Conductas Compensatorias Inapropiadas:</strong> Intentos desesperados por mitigar los efectos del atracón, como el vómito autoinducido, el abuso de laxantes y diuréticos, ayunos prolongados o ejercicio físico compulsivo.</div></li>
-                    <li><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9 9.563c0-1.036.84-1.875 1.875-1.875s1.875.84 1.875 1.875v.281c0 .597.237 1.17.659 1.591l.244.243a.825.825 0 001.166 0l.243-.243a1.875 1.875 0 00.66-1.59V9.563c0-1.036.84-1.875 1.875-1.875s1.875.84 1.875 1.875v.281c0 .597.237 1.17.659 1.591l.244.243a.825.825 0 001.166 0l.243-.243a1.875 1.875 0 00.66-1.59V9.563" /></svg><div><strong>Preocupación Obsesiva por la Imagen Corporal:</strong> La autoestima y la autopercepción están intrínsecamente ligadas al peso y la figura, creando una distorsión de la imagen corporal.</div></li>
-                </ul>
-            </section>
-            
-            <section id="ciclo">
-                <h2>El Ciclo de la Bulimia</h2>
-                <p>La bulimia opera en un ciclo destructivo que se retroalimenta. Comprenderlo es clave para la recuperación.</p>
-                <div class="cycle-container">
-                    <div class="cycle-step">
-                        <div class="cycle-icon-wrapper"><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div>
-                        <strong>Ansiedad y Tensión</strong>
-                    </div>
-                     <div class="cycle-step">
-                        <div class="cycle-icon-wrapper"><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg></div>
-                        <strong>Atracón</strong>
-                    </div>
-                     <div class="cycle-step">
-                        <div class="cycle-icon-wrapper"><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 7.5A2.25 2.25 0 017.5 5.25h9a2.25 2.25 0 012.25 2.25v9a2.25 2.25 0 01-2.25 2.25h-9a2.25 2.25 0 01-2.25-2.25v-9z" /></svg></div>
-                        <strong>Purga Compensatoria</strong>
-                    </div>
-                     <div class="cycle-step">
-                        <div class="cycle-icon-wrapper"><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg></div>
-                        <strong>Alivio Temporal y Culpa</strong>
-                    </div>
-                </div>
-            </section>
-
-            <section id="factores">
-                <h2>Factores de Riesgo</h2>
-                <p>La bulimia es multifactorial. No hay una única causa, sino una compleja interacción de factores biológicos, psicológicos y socioculturales.</p>
-                <ul>
-                    <li><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.362-3.362z" /></svg><div><strong>Psicológicos:</strong> Baja autoestima, perfeccionismo, impulsividad, y la coexistencia de otros trastornos como la ansiedad, depresión o el trastorno obsesivo-compulsivo.</div></li>
-                    <li><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m-7.5-2.962A3 3 0 0110.5 9.75v-.75a3 3 0 013-3h.75a3 3 0 013 3v.75a3 3 0 01-3 3h-.75a3 3 0 01-3-3z" /></svg><div><strong>Socioculturales:</strong> La presión social por alcanzar un ideal de delgadez irreal, el acoso escolar relacionado con el peso y la influencia de los medios de comunicación y las redes sociales.</div></li>
-                </ul>
-            </section>
-
-            <section id="consecuencias">
-                <h2><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>Graves Consecuencias para la Salud</h2>
-                <ul>
-                    <li><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg><div><strong>Daño Físico Severo:</strong> Desequilibrios electrolíticos que pueden provocar arritmias cardíacas fatales, daño permanente en el esófago y el esmalte dental, problemas gastrointestinales crónicos, deshidratación y fallo renal.</div></li>
-                    <li><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.5 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" /></svg><div><strong>Impacto Psicológico Profundo:</strong> Aislamiento social, depresión mayor, trastornos de ansiedad, irritabilidad constante y un riesgo significativamente elevado de autolesiones y suicidio.</div></li>
-                </ul>
-            </section>
-            
-            <section id="ayuda">
-                <h2>Buscando Ayuda: El Camino Hacia la Recuperación</h2>
-                <p>La recuperación es posible con el apoyo adecuado. Dar el primer paso es el acto más valiente. El tratamiento es un enfoque integral que aborda la mente y el cuerpo.</p>
-                <ul>
-                    <li><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" /></svg><div><strong>Terapia Psicológica:</strong> Es la piedra angular del tratamiento. La Terapia Cognitivo-Conductual (TCC) y la Terapia Dialéctica Conductual (TDC) son altamente efectivas.</div></li>
-                    <li><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.243 0 2.25 1.007 2.25 2.25v.19c0 .414.336.75.75.75h3.368c.26 0 .49.168.616.414.314.622.314 1.354 0 1.976a1.126 1.126 0 01-.616.414H18a.75.75 0 00-.75.75v.19c0 1.243-1.007 2.25-2.25 2.25h-1.5a2.251 2.251 0 01-2.15-1.586m-5.8 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m0 0A2.251 2.251 0 018.25 2.25H9c1.243 0 2.25 1.007 2.25 2.25v.19c0 .414.336.75.75.75h3.368c.26 0 .49.168.616.414.314.622.314 1.354 0 1.976a1.126 1.126 0 01-.616.414H12a.75.75 0 00-.75.75v.19c0 1.243-1.007 2.25-2.25 2.25H7.5a2.251 2.251 0 01-2.15-1.586m12.8-5.718a.75.75 0 00-1.06-1.06L12 12.94l-1.22-1.22a.75.75 0 00-1.06 1.06l1.75 1.75a.75.75 0 001.06 0l2.75-2.75z" /></svg><div><strong>Asesoramiento Nutricional:</strong> Un dietista especializado ayuda a reestablecer una relación sana con la comida y a desmitificar conceptos erróneos sobre la nutrición.</div></li>
-                    <li><svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><div><strong>Soporte Médico y Farmacológico:</strong> Un médico monitorea la salud física. En algunos casos, los antidepresivos pueden ayudar a controlar los impulsos y los síntomas depresivos.</div></li>
-                </ul>
-                <div class="btn-container">
-                     <a href="https://www.google.com/search?q=grupos+de+apoyo+para+trastornos+alimentarios" target="_blank" rel="noopener noreferrer" class="cta-button">Encontrar Grupos de Apoyo</a>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <p>Copyright 2025 - Esta página es un recurso informativo y no reemplaza el consejo médico profesional.</p>
-        </footer>
+    <!-- ===== CONTROL DE VOLUMEN ===== -->
+    <div id="volume-control">
+        <button id="volume-button">
+            <!-- El SVG del ícono se cambiará dinámicamente con JS -->
+        </button>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5">
     </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const loaderWrapper = document.getElementById('loader-wrapper');
-        const mainContainer = document.querySelector('.container');
 
-        setTimeout(() => {
-            loaderWrapper.style.display = 'none';
-            mainContainer.style.display = 'block';
-        }, 2500); 
+    <!-- ===== HEADER ===== -->
+    <header id="header" class="fixed top-0 left-0 w-full bg-surface/0 backdrop-blur-sm z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-display font-bold text-2xl text-primary tracking-tighter">Hablemos.</a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#definicion-detallada" class="text-secondary hover:text-accent transition-colors duration-300">Definición</a>
+                <a href="#causas-factores" class="text-secondary hover:text-accent transition-colors duration-300">Causas</a>
+                <a href="#sintomas-alertas" class="text-secondary hover:text-accent transition-colors duration-300">Síntomas</a>
+                <a href="#ayuda" class="bg-accent text-white px-5 py-2 rounded-lg font-medium hover:bg-accent-hover transition-all duration-300 shadow-sm hover:shadow-md transform hover:translate-y-1">Buscar Ayuda</a>
+            </nav>
+            <button id="menu-btn" class="md:hidden z-50">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-screen bg-surface">
+            <nav class="flex flex-col items-center justify-center h-full space-y-8">
+                <a href="#definicion-detallada" class="text-secondary hover:text-accent text-2xl font-display">Definición</a>
+                <a href="#causas-factores" class="text-secondary hover:text-accent text-2xl font-display">Causas</a>
+                <a href="#sintomas-alertas" class="text-secondary hover:text-accent text-2xl font-display">Síntomas</a>
+                <a href="#ayuda" class="bg-accent text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-accent-hover transition-all duration-300 transform hover:translate-y-1">Buscar Ayuda</a>
+            </nav>
+        </div>
+    </header>
 
-        const sections = document.querySelectorAll('section');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+    <main>
+        <!-- ===== HERO SECTION ===== -->
+        <section class="min-h-screen pt-24 md:pt-32 flex items-center bg-background">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold !leading-tight tracking-tighter hero-title">
+                    Hablemos sobre la Bulimia.
+                </h1>
+                <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-secondary reveal" style="transition-delay: 1s;">
+                    Es un tema serio, pero informarse y hablar es el primer paso para ayudar y entender. No estás solo/a.
+                </p>
+                <a href="#info-completa" class="mt-10 inline-block bg-accent text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-accent-hover transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 reveal cta-glow" style="transition-delay: 1.2s;">
+                    Aprender más
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== SECCIÓN DE INFORMACIÓN DETALLADA ===== -->
+        <section id="info-completa" class="py-20 md:py-32 bg-surface">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto reveal">
+                    <span class="font-display text-accent font-semibold">Información Detallada</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold mt-2 mb-6 tracking-tight">Comprendiendo la Bulimia Nerviosa</h2>
+                    <p class="text-secondary text-lg">
+                        Aquí encontrarás información clave para entender qué es, sus causas, síntomas y cómo se puede tratar.
+                    </p>
+                </div>
+                <div class="mt-16 space-y-16 max-w-5xl mx-auto">
+                    <!-- 1. ¿Qué es la bulimia nerviosa? -->
+                    <div id="definicion-detallada" class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center reveal">
+                        <div class="order-2 md:order-1">
+                            <h3 class="font-display font-bold text-2xl mb-4 text-primary flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                                <span class="ml-3">1. ¿Qué es la bulimia nerviosa?</span>
+                            </h3>
+                            <p class="text-secondary text-lg leading-relaxed">
+                                La bulimia nerviosa es un trastorno de la conducta alimentaria grave y potencialmente mortal. A diferencia de la anorexia, las personas con bulimia suelen tener un peso normal o sobrepeso. La característica principal es un ciclo de atracones seguidos de conductas compensatorias.
+                            </p>
+                            <ul class="mt-4 space-y-2 text-secondary text-lg list-disc list-inside">
+                                <li><b>Atracones:</b> Ingerir mucha comida en poco tiempo, con sensación de pérdida de control.</li>
+                                <li><b>Conductas compensatorias:</b> Acciones para "compensar" el atracón, como el vómito autoinducido, uso de laxantes, ayuno o ejercicio excesivo.</li>
+                            </ul>
+                        </div>
+                        <div class="order-1 md:order-2">
+                             <img src="https://i.ibb.co/5gXBgm75/gogeable.jpg" alt="Persona recibiendo apoyo y consuelo" class="rounded-lg shadow-xl w-full h-auto object-cover aspect-square">
+                        </div>
+                    </div>
+    
+                    <!-- 2. Causas y factores de riesgo -->
+                    <div id="causas-factores" class="bg-background p-8 md:p-12 rounded-lg shadow-md reveal info-card">
+                        <h3 class="font-display font-bold text-2xl mb-6 text-primary flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M12.5 2.5l-3 3-3-3-3 3-3-3"></path><path d="M12.5 8.5l-3 3-3-3-3 3-3-3"></path><path d="M12.5 14.5l-3 3-3-3-3 3-3-3"></path><path d="M12.5 20.5l-3 3-3-3-3 3-3-3"></path></svg>
+                            <span class="ml-3">2. Causas y factores de riesgo</span>
+                        </h3>
+                        <p class="text-secondary text-lg leading-relaxed mb-6">La bulimia no tiene una causa única, sino que es el resultado de una combinación de factores:</p>
+                        <div class="grid md:grid-cols-3 gap-8 text-secondary text-lg">
+                           <div>
+                                <h4 class="font-bold text-primary mb-2">Psicológicos:</h4>
+                                <p>Baja autoestima, imagen corporal negativa, perfeccionismo y dificultad para manejar el estrés, la ansiedad o la depresión.</p>
+                           </div>
+                           <div>
+                                <h4 class="font-bold text-primary mb-2">Biológicos:</h4>
+                                <p>Predisposición genética y posibles desequilibrios en neurotransmisores como la serotonina (que regula el ánimo y el apetito).</p>
+                           </div>
+                           <div>
+                                <h4 class="font-bold text-primary mb-2">Socioculturales:</h4>
+                                <p>Presión social por un ideal de delgadez y la influencia de imágenes de cuerpos "perfectos" en redes sociales y medios.</p>
+                           </div>
+                        </div>
+                    </div>
+    
+                    <!-- 3. Síntomas y señales de alerta -->
+                    <div id="sintomas-alertas" class="bg-surface p-8 md:p-12 rounded-lg shadow-md reveal info-card">
+                         <h3 class="font-display font-bold text-2xl mb-6 text-primary flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                            <span class="ml-3">3. Síntomas y señales de alerta</span>
+                         </h3>
+                         <p class="text-secondary text-lg leading-relaxed mb-6">Los síntomas pueden ser difíciles de detectar porque se suelen ocultar. Algunas señales son:</p>
+                         <div class="grid md:grid-cols-2 gap-8">
+                             <div>
+                                 <h4 class="font-bold text-primary mb-2">Cambios en el comportamiento:</h4>
+                                 <ul class="space-y-2 text-secondary text-lg list-disc list-inside">
+                                     <li>Preocupación extrema por el peso.</li>
+                                     <li>Cambios de humor y aislamiento social.</li>
+                                     <li>Ir al baño con frecuencia después de comer.</li>
+                                 </ul>
+                             </div>
+                             <div>
+                                 <h4 class="font-bold text-primary mb-2">Síntomas físicos y problemas de salud:</h4>
+                                 <ul class="space-y-2 text-secondary text-lg list-disc list-inside">
+                                    <li>Cara hinchada por inflamación de glándulas.</li>
+                                    <li>Erosión dental y callos en los nudillos (signo de Russell).</li>
+                                    <li>Fatiga, deshidratación y arritmias cardíacas.</li>
+                                 </ul>
+                             </div>
+                         </div>
+                    </div>
+    
+                    <!-- 4. Tratamiento y recuperación -->
+                    <div id="tratamiento-recuperacion" class="bg-background p-8 md:p-12 rounded-lg shadow-md reveal info-card">
+                         <h3 class="font-display font-bold text-2xl mb-6 text-primary flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                            <span class="ml-3">4. Tratamiento y recuperación</span>
+                         </h3>
+                         <p class="text-secondary text-lg leading-relaxed mb-6">El tratamiento es integral y aborda las causas de fondo, no solo la comida. La recuperación es posible.</p>
+                         <ul class="space-y-4 text-secondary text-lg">
+                             <li><b>Terapia psicológica:</b> La Terapia Cognitivo-Conductual (TCC) es muy efectiva para cambiar pensamientos y comportamientos dañinos.</li>
+                             <li><b>Asesoramiento nutricional:</b> Un profesional ayuda a establecer un patrón de alimentación saludable y a desmitificar creencias sobre la comida.</li>
+                             <li><b>Medicación:</b> A veces, los antidepresivos pueden ayudar a reducir los atracones y tratar la ansiedad o depresión.</li>
+                         </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SECCIÓN DE TESTIMONIO/MENSAJE ===== -->
+        <section class="py-20 md:py-32">
+            <div class="container mx-auto px-6 reveal">
+                <div class="max-w-4xl mx-auto">
+                    <blockquote class="text-center">
+                        <p class="text-xl md:text-2xl font-medium text-primary">
+                           “Hablar de lo que me pasaba fue lo más difícil, pero también lo que me salvó. Pedir ayuda no es de débiles, es de valientes. La recuperación es un camino, pero es posible.”
+                        </p>
+                        <footer class="mt-8">
+                            <p class="font-bold text-lg">- Anónimo</p>
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== FOOTER / AYUDA ===== -->
+    <footer id="ayuda" class="bg-background py-16">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="font-display text-3xl font-bold reveal">Pedir ayuda es el paso más importante.</h2>
+            <p class="text-secondary mt-4 max-w-2xl mx-auto reveal" style="transition-delay: 150ms;">
+                Si vos o alguien que conocés necesita ayuda, no duden en buscarla. Hay personas dispuestas a escuchar y acompañar.
+            </p>
+            <div class="mt-8 reveal" style="transition-delay: 300ms;">
+                <p class="font-bold text-lg">Recursos en Argentina:</p>
+                <div class="mt-4 space-y-2">
+                    <p class="text-secondary"><b>ALUBA:</b> 011-4306-0033 / 0800-222-5822</p>
+                    <p class="text-secondary"><b>La Casita:</b> 011-4786-2352 / 011-15-4412-2575</p>
+                    <p class="text-secondary"><b>Salud Mental Responde (CABA):</b> 0800-333-1665</p>
+                </div>
+            </div>
+           
+            <p class="text-secondary text-sm mt-12">
+                © <span id="year"></span> Exposición de Ciudadanía. Esta página es un recurso informativo.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- ELEMENTOS ---
+            const loader = document.getElementById('loader-wrapper');
+            const lofiMusic = document.getElementById('lofi-music');
+            const volumeButton = document.getElementById('volume-button');
+            const volumeSlider = document.getElementById('volume-slider');
+            let userHasInteracted = false;
+            let fadeInterval;
+
+            // --- ICONOS DE VOLUMEN (SVG) ---
+            const icons = {
+                muted: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>`,
+                low: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`,
+                high: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`
+            };
+            
+            // --- LÓGICA DE MÚSICA ---
+            const setVolumeIcon = (volume) => {
+                if (lofiMusic.muted || volume === 0) volumeButton.innerHTML = icons.muted;
+                else if (volume < 0.5) volumeButton.innerHTML = icons.low;
+                else volumeButton.innerHTML = icons.high;
+            };
+
+            const fadeAudio = (targetVolume, duration = 1000) => {
+                clearInterval(fadeInterval);
+                const startVolume = lofiMusic.volume;
+                const step = (targetVolume - startVolume) / (duration / 50);
+                fadeInterval = setInterval(() => {
+                    const newVolume = lofiMusic.volume + step;
+                    if ((step > 0 && newVolume >= targetVolume) || (step < 0 && newVolume <= targetVolume)) {
+                        lofiMusic.volume = targetVolume;
+                        clearInterval(fadeInterval);
+                        if (targetVolume === 0) lofiMusic.pause();
+                    } else {
+                        lofiMusic.volume = newVolume;
+                    }
+                    setVolumeIcon(lofiMusic.volume);
+                }, 50);
+            };
+
+            const playMusic = () => {
+                lofiMusic.currentTime = 0;
+                lofiMusic.volume = 0;
+                setVolumeIcon(0);
+                const playPromise = lofiMusic.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        fadeAudio(parseFloat(volumeSlider.value));
+                    }).catch(error => {
+                        console.log("La reproducción automática fue bloqueada. Se necesita interacción del usuario.");
+                        // Handle browsers that block autoplay strictly
+                        document.body.addEventListener('click', () => {
+                           if(lofiMusic.paused && !userHasInteracted) {
+                               userHasInteracted = true;
+                               playMusic();
+                           }
+                        }, { once: true });
+                    });
                 }
+            };
+            
+            lofiMusic.addEventListener('ended', () => {
+                setTimeout(() => playMusic(), 1000); // 1s delay before looping
             });
-        }, {
-            threshold: 0.1
+            
+            volumeButton.addEventListener('click', () => {
+                lofiMusic.muted = !lofiMusic.muted;
+                setVolumeIcon(lofiMusic.muted ? 0 : lofiMusic.volume);
+            });
+            
+            volumeSlider.addEventListener('input', (e) => {
+                const newVolume = parseFloat(e.target.value);
+                lofiMusic.volume = newVolume;
+                if(lofiMusic.muted && newVolume > 0) lofiMusic.muted = false;
+                setVolumeIcon(newVolume);
+            });
+            
+            // --- INICIO DE TODO ---
+            setVolumeIcon(parseFloat(volumeSlider.value)); // Set initial icon
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                setTimeout(() => playMusic(), 500); // 0.5s delay after loader
+            }, 1500);
+
+            // --- Lógica del menú móvil ---
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.querySelectorAll('header a[href^="#"]');
+            const toggleMenu = () => {
+                const isMenuOpen = !mobileMenu.classList.contains('hidden');
+                mobileMenu.classList.toggle('hidden');
+                document.body.style.overflow = isMenuOpen ? 'auto' : 'hidden';
+                menuBtn.innerHTML = isMenuOpen 
+                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`
+                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+            };
+            menuBtn.addEventListener('click', toggleMenu);
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                     if (!mobileMenu.classList.contains('hidden')) toggleMenu();
+                });
+            });
+
+            // --- Lógica para animaciones al hacer scroll (CORREGIDO) ---
+            const revealElements = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) { // <-- AQUÍ ESTABA EL ERROR
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            revealElements.forEach(element => observer.observe(element));
+            
+            // --- Lógica para animar el título del Hero ---
+            const heroTitle = document.querySelector('.hero-title');
+            if(heroTitle && heroTitle.textContent) {
+                const words = heroTitle.textContent.trim().split(' ');
+                heroTitle.innerHTML = '';
+                words.forEach((word, index) => {
+                    const wordSpan = document.createElement('span');
+                    wordSpan.textContent = word;
+                    wordSpan.style.animationDelay = `${index * 0.1 + 1.5}s`;
+                    heroTitle.appendChild(wordSpan);
+                    if (index < words.length - 1) heroTitle.append(' ');
+                });
+            }
+            
+            // --- Lógica para la sombra del header ---
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('scrolled', window.scrollY > 10);
+            });
+
+            // --- Lógica para la animación de lluvia ---
+            const canvas = document.getElementById('rain-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            let drops = [];
+            for (let i = 0; i < 100; i++) {
+                drops.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    length: Math.random() * 20 + 10,
+                    speed: Math.random() * 5 + 2,
+                });
+            }
+            function drawRain() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.strokeStyle = 'rgba(175, 215, 235, 0.3)';
+                ctx.lineWidth = 1;
+                for (let i = 0; i < drops.length; i++) {
+                    let drop = drops[i];
+                    ctx.beginPath();
+                    ctx.moveTo(drop.x, drop.y);
+                    ctx.lineTo(drop.x, drop.y + drop.length);
+                    ctx.stroke();
+                    drop.y += drop.speed;
+                    if (drop.y > canvas.height) {
+                        drop.y = -drop.length;
+                        drop.x = Math.random() * canvas.width;
+                    }
+                }
+                requestAnimationFrame(drawRain);
+            }
+            drawRain();
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+
+            // --- Actualizar año del footer ---
+            document.getElementById('year').textContent = new Date().getFullYear();
         });
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-    });
-</script>
+    </script>
 </body>
 </html>
 
