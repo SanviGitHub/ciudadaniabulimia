@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="es" class="scroll-smooth">
     <head>
         <meta charset="UTF-8">
@@ -27,7 +27,6 @@
             }
         </script>
         
-        <!-- Google Fonts: Inter y Poppins -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
@@ -83,7 +82,6 @@
     </head>
     <body class="bg-background text-primary antialiased">
 
-        <!-- ===== LOADER ===== -->
         <div id="loader-wrapper">
             <canvas id="rain-canvas"></canvas>
             <div class="loader-content">
@@ -97,13 +95,11 @@
             </audio>
         </div>
 
-        <!-- ===== CONTROL DE VOLUMEN ===== -->
         <div id="volume-control">
             <button id="volume-button"></button>
             <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5">
         </div>
 
-        <!-- ===== HEADER ===== -->
         <header id="header" class="fixed top-0 left-0 w-full bg-surface/0 backdrop-blur-sm z-50">
             <div class="container mx-auto px-6 py-4 flex justify-between items-center">
                 <a href="#" class="font-display font-bold text-2xl text-primary tracking-tighter">Hablemos.</a>
@@ -124,7 +120,6 @@
         </header>
 
         <main>
-            <!-- ===== HERO SECTION + JUEGO ===== -->
             <section class="min-h-screen pt-24 pb-12 md:pt-32 flex flex-col items-center justify-center bg-background">
                 <div class="container mx-auto px-6 text-center">
                     <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold !leading-tight tracking-tighter hero-title">
@@ -138,37 +133,27 @@
                     </a>
                 </div>
 
-                <!-- ===== MINIJUEGO: ENCUENTRA LA PALABRA ===== -->
                 <div id="word-game-container" class="mt-16 md:mt-20 w-full max-w-4xl mx-auto text-center reveal px-4" style="transition-delay: 1.4s;">
-                    <!-- Lista de palabras a encontrar -->
                     <div class="mb-4">
                         <h3 class="font-display text-xl font-bold text-primary">Palabras a encontrar:</h3>
                         <div id="words-to-find" class="flex flex-wrap justify-center gap-x-4 gap-y-2 mt-2 text-secondary text-lg">
-                            <!-- Las 4 palabras se insertarán aquí dinámicamente -->
-                        </div>
+                            </div>
                     </div>
 
-                    <!-- Contenedor principal del juego -->
                     <div class="bg-surface p-6 sm:p-8 rounded-lg shadow-lg relative min-h-[300px]">
                         <p class="text-secondary mb-2">Selecciona las letras en el orden correcto para descubrir la palabra secreta.</p>
                         
-                        <!-- Stats del juego -->
                         <div class="flex justify-between items-center mb-4 text-sm font-medium text-secondary">
                             <span id="game-word-counter">Palabra 1 / 4</span>
                             <span id="game-attempts-counter">Intentos restantes: 3</span>
                         </div>
 
-                        <!-- Área de la palabra actual -->
                         <div id="current-word-display" class="flex justify-center gap-2 text-3xl sm:text-4xl font-bold font-display tracking-widest text-primary mb-6 h-12">
-                            <!-- Las letras/guiones se insertarán aquí -->
-                        </div>
+                            </div>
 
-                        <!-- Opciones de letras -->
                         <div id="letter-options" class="flex flex-wrap justify-center gap-2 sm:gap-3">
-                            <!-- Los botones de letras se insertarán aquí -->
-                        </div>
+                            </div>
 
-                        <!-- Mensaje de Feedback -->
                         <div id="game-feedback" class="absolute inset-0 bg-surface/90 backdrop-blur-sm flex flex-col justify-center items-center rounded-lg opacity-0 pointer-events-none transition-opacity duration-300">
                             <p id="feedback-message" class="text-3xl font-bold font-display text-center"></p>
                             <button id="feedback-button" class="mt-4 bg-accent text-white px-6 py-2 rounded-lg font-medium hover:bg-accent-hover transition-colors">Continuar</button>
@@ -177,7 +162,6 @@
                 </div>
             </section>
 
-            <!-- ===== SECCIÓN DE INFORMACIÓN DETALLADA ===== -->
             <section id="info-completa" class="py-20 md:py-32 bg-surface">
                 <div class="container mx-auto px-6">
                     <div class="text-center max-w-3xl mx-auto reveal">
@@ -188,7 +172,6 @@
                         </p>
                     </div>
                     <div class="mt-16 space-y-16 max-w-5xl mx-auto">
-                        <!-- Contenido informativo... -->
                         <div id="definicion-detallada" class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center reveal">
                             <div class="order-2 md:order-1">
                                 <h3 class="font-display font-bold text-2xl mb-4 text-primary flex items-center">
@@ -212,22 +195,75 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M12.5 2.5l-3 3-3-3-3 3-3-3"></path><path d="M12.5 8.5l-3 3-3-3-3 3-3-3"></path><path d="M12.5 14.5l-3 3-3-3-3 3-3-3"></path><path d="M12.5 20.5l-3 3-3-3-3 3-3-3"></path></svg>
                                 <span class="ml-3">2. Causas y factores de riesgo</span>
                             </h3>
-                            <p class="text-secondary text-lg leading-relaxed mb-6">La bulimia no tiene una causa única, sino que es el resultado de una combinación de factores:</p>
-                            <div class="grid md:grid-cols-3 gap-8 text-secondary text-lg">
-                            <div><h4 class="font-bold text-primary mb-2">Psicológicos:</h4><p>Baja autoestima, imagen corporal negativa, perfeccionismo y dificultad para manejar el estrés, la ansiedad o la depresión.</p></div>
-                            <div><h4 class="font-bold text-primary mb-2">Biológicos:</h4><p>Predisposición genética y posibles desequilibrios en neurotransmisores como la serotonina (que regula el ánimo y el apetito).</p></div>
-                            <div><h4 class="font-bold text-primary mb-2">Socioculturales:</h4><p>Presión social por un ideal de delgadez y la influencia de imágenes de cuerpos "perfectos" en redes sociales y medios.</p></div>
+                            <p class="text-secondary text-lg leading-relaxed mb-8">
+                                La bulimia nerviosa no surge de una única causa, sino que se entiende como el resultado de una compleja interacción de factores psicológicos, biológicos y socioculturales, que se potencian entre sí y pueden aumentar la vulnerabilidad de una persona a desarrollar este trastorno.
+                            </p>
+                    
+                            <div class="space-y-8">
+                                <div>
+                                    <h4 class="font-bold text-primary text-xl mb-3">Factores Psicológicos</h4>
+                                    <p class="text-secondary text-lg leading-relaxed mb-4">
+                                        Las personas con bulimia suelen presentar una combinación de rasgos y experiencias emocionales que contribuyen a su aparición:
+                                    </p>
+                                    <ul class="space-y-3 text-secondary text-lg list-disc list-inside">
+                                        <li><b>Baja autoestima y autocrítica intensa:</b> una sensación constante de no ser suficiente o de no tener valor propio.</li>
+                                        <li><b>Imagen corporal negativa:</b> distorsión de la percepción del propio cuerpo, con insatisfacción persistente hacia el peso o la forma.</li>
+                                        <li><b>Perfeccionismo:</b> necesidad de cumplir estándares imposibles, lo que lleva a frustración y a conductas compensatorias extremas.</li>
+                                        <li><b>Manejo inadecuado de emociones:</b> dificultad para afrontar el estrés, la ansiedad, la soledad o la depresión. Los atracones pueden funcionar como una forma de escape momentáneo, seguidos de la culpa que desencadena conductas purgativas.</li>
+                                    </ul>
+                                </div>
+                    
+                                <div>
+                                    <h4 class="font-bold text-primary text-xl mb-3">Factores Biológicos</h4>
+                                    <p class="text-secondary text-lg leading-relaxed mb-4">
+                                        La investigación ha encontrado que existen elementos biológicos que aumentan el riesgo:
+                                    </p>
+                                    <ul class="space-y-3 text-secondary text-lg list-disc list-inside">
+                                        <li><b>Predisposición genética:</b> tener familiares con antecedentes de trastornos de la conducta alimentaria, depresión o adicciones eleva la probabilidad.</li>
+                                        <li><b>Neurotransmisores alterados:</b> desequilibrios en sustancias como la serotonina y la dopamina, que regulan el estado de ánimo, la sensación de recompensa y el apetito.</li>
+                                        <li><b>Factores hormonales:</b> los cambios durante la adolescencia, especialmente en mujeres, pueden actuar como desencadenantes debido a la mayor sensibilidad emocional y corporal en esa etapa.</li>
+                                    </ul>
+                                </div>
+                    
+                                <div>
+                                    <h4 class="font-bold text-primary text-xl mb-3">Factores Socioculturales</h4>
+                                    <p class="text-secondary text-lg leading-relaxed mb-4">
+                                        El entorno social y cultural ejerce una gran influencia en la aparición y el mantenimiento de la bulimia:
+                                    </p>
+                                    <ul class="space-y-3 text-secondary text-lg list-disc list-inside">
+                                        <li><b>Ideal de delgadez:</b> la presión por alcanzar estándares de belleza poco realistas promovidos por medios de comunicación, publicidad y redes sociales.</li>
+                                        <li><b>Normalización de dietas extremas:</b> la cultura de la “dieta rápida” y el mensaje de que “el valor personal depende del cuerpo” refuerzan la insatisfacción física.</li>
+                                        <li><b>Entorno familiar y social:</b> comentarios negativos sobre el peso, experiencias de burlas o bullying, y contextos donde la apariencia es muy valorada pueden favorecer la aparición del trastorno.</li>
+                                        <li><b>Impacto de las redes sociales:</b> la exposición constante a imágenes editadas o filtradas genera comparaciones dañinas y presión constante por cumplir con un “cuerpo perfecto”.</li>
+                                    </ul>
+                                </div>
                             </div>
+                    
+                            <p class="text-secondary text-lg leading-relaxed mt-8">
+                                En resumen, la bulimia es un trastorno complejo en el que influyen predisposiciones internas y factores externos. No basta con señalar una única causa: es la combinación de vulnerabilidad psicológica, componentes biológicos y presiones socioculturales lo que crea el terreno para que aparezca y se mantenga.
+                            </p>
                         </div>
                         <div id="sintomas-alertas" class="bg-surface p-8 md:p-12 rounded-lg shadow-md reveal info-card">
                             <h3 class="font-display font-bold text-2xl mb-6 text-primary flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
                                 <span class="ml-3">3. Síntomas y señales de alerta</span>
                             </h3>
-                            <p class="text-secondary text-lg leading-relaxed mb-6">Los síntomas pueden ser difíciles de detectar porque se suelen ocultar. Algunas señales son:</p>
-                            <div class="grid md:grid-cols-2 gap-8">
-                                <div><h4 class="font-bold text-primary mb-2">Cambios en el comportamiento:</h4><ul class="space-y-2 text-secondary text-lg list-disc list-inside"><li>Preocupación extrema por el peso.</li><li>Cambios de humor y aislamiento social.</li><li>Ir al baño con frecuencia después de comer.</li></ul></div>
-                                <div><h4 class="font-bold text-primary mb-2">Síntomas físicos y problemas de salud:</h4><ul class="space-y-2 text-secondary text-lg list-disc list-inside"><li>Cara hinchada por inflamación de glándulas.</li><li>Erosión dental y callos en los nudillos (signo de Russell).</li><li>Fatiga, deshidratación y arritmias cardíacas.</li></ul></div>
+                            <p class="text-secondary text-lg leading-relaxed mb-8">
+                                La bulimia se manifiesta a través de un ciclo de atracones de comida seguidos de conductas compensatorias (como el vómito o el uso de laxantes).
+                            </p>
+                            <div class="grid md:grid-cols-3 gap-8 text-secondary text-lg">
+                                <div>
+                                    <h4 class="font-bold text-primary mb-2">Comportamiento</h4>
+                                    <p>La persona que padece bulimia se caracteriza por una obsesión con el peso y la figura. Experimenta episodios de atracones y utiliza conductas como el vómito, laxantes o ejercicio excesivo para compensar. Este comportamiento suele ser oculto.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-primary mb-2">Señales físicas</h4>
+                                    <p>El vómito autoinducido causa hinchazón facial por la inflamación de las glándulas salivales y daño dental por la erosión del esmalte. También es común encontrar callosidades en los nudillos (signo de Russell) por el uso repetido de las manos para purgarse.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-primary mb-2">Problemas de salud</h4>
+                                    <p>El ciclo de atracones y purgas es extremadamente dañino y puede llevar a problemas graves como arritmias cardíacas (por el desequilibrio de electrolitos), daño en el esófago y fallo renal debido a la deshidratación crónica.</p>
+                                </div>
                             </div>
                         </div>
                         <div id="tratamiento-recuperacion" class="bg-background p-8 md:p-12 rounded-lg shadow-md reveal info-card">
@@ -246,7 +282,6 @@
                 </div>
             </section>
 
-            <!-- ===== SECCIÓN DE TESTIMONIO/MENSAJE ===== -->
             <section class="py-20 md:py-32">
                 <div class="container mx-auto px-6 reveal">
                     <div class="max-w-4xl mx-auto"><blockquote class="text-center"><p class="text-xl md:text-2xl font-medium text-primary">“Hablar de lo que me pasaba fue lo más difícil, pero también lo que me salvó. Pedir ayuda no es de débiles, es de valientes. La recuperación es un camino, pero es posible.”</p><footer class="mt-8"><p class="font-bold text-lg">- Anónimo</p></footer></blockquote></div>
@@ -254,7 +289,6 @@
             </section>
         </main>
 
-        <!-- ===== FOOTER / AYUDA ===== -->
         <footer id="ayuda" class="bg-background py-16">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="font-display text-3xl font-bold reveal">Pedir ayuda es el paso más importante.</h2>
@@ -613,4 +647,3 @@ const wordList = [
         </script>
     </body>
     </html>
-
