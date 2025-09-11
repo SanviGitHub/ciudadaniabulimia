@@ -1,490 +1,616 @@
-<!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hablemos de Bulimia | Exposición de Ciudadanía</title>
-    <meta name="description" content="Una página informativa y de concientización sobre la bulimia, creada para una exposición escolar.">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Configuración de Tailwind (CORREGIDO) -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'sans': ['Inter', 'sans-serif'],
-                        'display': ['Poppins', 'sans-serif'],
-                    },
-                    colors: {
-                        'background': '#F8F9FA', // Gris muy suave
-                        'surface': '#FFFFFF', // Blanco
-                        'primary': '#111827', // Gris oscuro casi negro
-                        'secondary': '#6B7280', // Gris para textos secundarios
-                        'accent': '#38bdf8', // Azul cielo sereno
-                        'accent-hover': '#0ea5e9', // Tono más oscuro para hover
+    <!DOCTYPE html>
+    <html lang="es" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hablemos de Bulimia | Exposición de Ciudadanía</title>
+        <meta name="description" content="Una página informativa y de concientización sobre la bulimia, creada para una exposición escolar.">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            'sans': ['Inter', 'sans-serif'],
+                            'display': ['Poppins', 'sans-serif'],
+                        },
+                        colors: {
+                            'background': '#F8F9FA', // Gris muy suave
+                            'surface': '#FFFFFF', // Blanco
+                            'primary': '#111827', // Gris oscuro casi negro
+                            'secondary': '#6B7280', // Gris para textos secundarios
+                            'accent': '#38bdf8', // Azul cielo sereno
+                            'accent-hover': '#0ea5e9', // Tono más oscuro para hover
+                        }
                     }
                 }
             }
-        }
-    </script>
-    
-    <!-- Google Fonts: Inter y Poppins -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Estilos personalizados y configuración de Tailwind -->
-    <style>
-        /* Animación para el scroll reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.6, 0.2, 0.4, 1), transform 0.8s cubic-bezier(0.6, 0.2, 0.4, 1);
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Estilo para la barra de scroll */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #F8F9FA; }
-        ::-webkit-scrollbar-thumb { background-color: #d1d5db; border-radius: 20px; }
+        </script>
         
-        /* --- NUEVOS ESTILOS Y ANIMACIONES --- */
-        #header { transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out; }
-        #header.scrolled { background-color: rgba(255, 255, 255, 0.8); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07); }
-        .cta-glow:hover { box-shadow: 0 0 20px 0 rgba(56, 189, 248, 0.6); }
-        .info-card { transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; }
-        .info-card:hover { transform: translateY(-8px); box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1); }
-        .hero-title span { display: inline-block; opacity: 0; transform: translateY(25px); animation: fadeIn-up 0.8s cubic-bezier(0.6, 0.2, 0.4, 1) forwards; }
-        @keyframes fadeIn-up { to { opacity: 1; transform: translateY(0); } }
+        <!-- Google Fonts: Inter y Poppins -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
 
-        /* --- LOADER STYLES --- */
-        #loader-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #1f2937; display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s ease-out; overflow: hidden; }
-        #rain-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-        #loader-wrapper.hidden { opacity: 0; pointer-events: none; }
-        .loader-content { text-align: center; z-index: 1; }
-        .loader-text { color: #F8F9FA; font-size: 1.5rem; margin-bottom: 1rem; }
-        .loader-bar-container { width: 250px; height: 6px; background-color: #4b5563; border-radius: 3px; overflow: hidden; }
-        .loader-bar { width: 0; height: 100%; background-color: #38bdf8; border-radius: 3px; animation: loading-animation 1.5s ease-out forwards; }
-        @keyframes loading-animation { from { width: 0%; } to { width: 100%; } }
+        <style>
+            ::-webkit-scrollbar { width: 8px; }
+            ::-webkit-scrollbar-track { background: #F8F9FA; }
+            ::-webkit-scrollbar-thumb { background-color: #d1d5db; border-radius: 20px; }
+            
+            /* Animaciones generales */
+            .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.6, 0.2, 0.4, 1), transform 0.8s cubic-bezier(0.6, 0.2, 0.4, 1); }
+            .reveal.visible { opacity: 1; transform: translateY(0); }
+            #header { transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out; }
+            #header.scrolled { background-color: rgba(255, 255, 255, 0.8); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07); }
+            .cta-glow:hover { box-shadow: 0 0 20px 0 rgba(56, 189, 248, 0.6); }
+            .info-card { transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; }
+            .info-card:hover { transform: translateY(-8px); box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1); }
+            .hero-title span { display: inline-block; opacity: 0; transform: translateY(25px); animation: fadeIn-up 0.8s cubic-bezier(0.6, 0.2, 0.4, 1) forwards; }
+            @keyframes fadeIn-up { to { opacity: 1; transform: translateY(0); } }
 
-        /* --- ESTILOS CONTROL DE VOLUMEN (TEMA OSCURO) --- */
-        #volume-control {
-            position: fixed;
-            bottom: 1rem;
-            right: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background-color: rgba(31, 41, 55, 0.8); /* Fondo oscuro semi-transparente */
-            padding: 0.5rem;
-            border-radius: 9999px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-        }
-        #volume-slider {
-            width: 0px;
-            opacity: 0;
-            transition: width 0.3s ease, opacity 0.3s ease;
-            -webkit-appearance: none;
-            background: transparent;
-        }
-        #volume-control:hover #volume-slider {
-            width: 80px;
-            opacity: 1;
-        }
-        #volume-slider::-webkit-slider-runnable-track { height: 4px; background: #6B7280; border-radius: 2px; } /* Pista de la barra en gris oscuro */
-        #volume-slider::-webkit-slider-thumb { -webkit-appearance: none; margin-top: -4px; height: 12px; width: 12px; background: #38bdf8; border-radius: 50%; cursor: pointer; }
-        #volume-button { 
-            cursor: pointer;
-            color: #F8F9FA; /* Icono en color claro para contraste */
-        }
-    </style>
-</head>
-<body class="bg-background text-primary antialiased">
+            /* Loader */
+            #loader-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #1f2937; display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s ease-out; overflow: hidden; }
+            #rain-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+            #loader-wrapper.hidden { opacity: 0; pointer-events: none; }
+            .loader-content { text-align: center; z-index: 1; }
+            .loader-text { color: #F8F9FA; font-size: 1.5rem; margin-bottom: 1rem; }
+            .loader-bar-container { width: 250px; height: 6px; background-color: #4b5563; border-radius: 3px; overflow: hidden; }
+            .loader-bar { width: 0; height: 100%; background-color: #38bdf8; border-radius: 3px; animation: loading-animation 1.5s ease-out forwards; }
+            @keyframes loading-animation { from { width: 0%; } to { width: 100%; } }
 
-    <!-- ===== LOADER ===== -->
-    <div id="loader-wrapper">
-        <canvas id="rain-canvas"></canvas>
-        <div class="loader-content">
-            <p class="loader-text font-display">Sanvy corporation</p>
-            <div class="loader-bar-container">
-                <div class="loader-bar"></div>
-            </div>
-        </div>
-        <audio id="lofi-music">
-            <source src="music.mp3" type="audio/mpeg">
-        </audio>
-    </div>
+            /* Control de Volumen */
+            #volume-control { position: fixed; bottom: 1rem; right: 1rem; display: flex; align-items: center; gap: 0.5rem; background-color: rgba(31, 41, 55, 0.8); padding: 0.5rem; border-radius: 9999px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); backdrop-filter: blur(5px); z-index: 1000; }
+            #volume-slider { width: 0px; opacity: 0; transition: width 0.3s ease, opacity 0.3s ease; -webkit-appearance: none; background: transparent; }
+            #volume-control:hover #volume-slider { width: 80px; opacity: 1; }
+            #volume-slider::-webkit-slider-runnable-track { height: 4px; background: #6B7280; border-radius: 2px; }
+            #volume-slider::-webkit-slider-thumb { -webkit-appearance: none; margin-top: -4px; height: 12px; width: 12px; background: #38bdf8; border-radius: 50%; cursor: pointer; }
+            #volume-button { cursor: pointer; color: #F8F9FA; }
 
-    <!-- ===== CONTROL DE VOLUMEN ===== -->
-    <div id="volume-control">
-        <button id="volume-button">
-            <!-- El SVG del ícono se cambiará dinámicamente con JS -->
-        </button>
-        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5">
-    </div>
+            /* --- ESTILOS DEL MINIJUEGO --- */
+            .word-to-find { transition: all 0.4s ease; }
+            .word-to-find.found { text-decoration: line-through; color: #9ca3af; opacity: 0.7; transform: scale(0.95); }
+            #current-word-display .letter-placeholder { display: flex; justify-content: center; align-items: center; width: 2.5rem; height: 3.5rem; border-bottom: 3px solid #d1d5db; transition: all 0.3s ease; }
+            .letter-option { transition: all 0.2s ease-in-out; }
+            .letter-option.correct { background-color: #22c55e !important; color: white; transform: scale(1.05); cursor: not-allowed; }
+            .letter-option.incorrect { animation: shake 0.5s ease-in-out; background-color: #ef4444 !important; color: white; }
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
+                20%, 40%, 60%, 80% { transform: translateX(8px); }
+            }
+            #game-feedback.visible { opacity: 1; pointer-events: auto; }
+        </style>
+    </head>
+    <body class="bg-background text-primary antialiased">
 
-    <!-- ===== HEADER ===== -->
-    <header id="header" class="fixed top-0 left-0 w-full bg-surface/0 backdrop-blur-sm z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="font-display font-bold text-2xl text-primary tracking-tighter">Hablemos.</a>
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="#definicion-detallada" class="text-secondary hover:text-accent transition-colors duration-300">Definición</a>
-                <a href="#causas-factores" class="text-secondary hover:text-accent transition-colors duration-300">Causas</a>
-                <a href="#sintomas-alertas" class="text-secondary hover:text-accent transition-colors duration-300">Síntomas</a>
-                <a href="#ayuda" class="bg-accent text-white px-5 py-2 rounded-lg font-medium hover:bg-accent-hover transition-all duration-300 shadow-sm hover:shadow-md transform hover:translate-y-1">Buscar Ayuda</a>
-            </nav>
-            <button id="menu-btn" class="md:hidden z-50">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-screen bg-surface">
-            <nav class="flex flex-col items-center justify-center h-full space-y-8">
-                <a href="#definicion-detallada" class="text-secondary hover:text-accent text-2xl font-display">Definición</a>
-                <a href="#causas-factores" class="text-secondary hover:text-accent text-2xl font-display">Causas</a>
-                <a href="#sintomas-alertas" class="text-secondary hover:text-accent text-2xl font-display">Síntomas</a>
-                <a href="#ayuda" class="bg-accent text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-accent-hover transition-all duration-300 transform hover:translate-y-1">Buscar Ayuda</a>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <!-- ===== HERO SECTION ===== -->
-        <section class="min-h-screen pt-24 md:pt-32 flex items-center bg-background">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold !leading-tight tracking-tighter hero-title">
-                    Hablemos sobre la Bulimia.
-                </h1>
-                <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-secondary reveal" style="transition-delay: 1s;">
-                    Es un tema serio, pero informarse y hablar es el primer paso para ayudar y entender. No estás solo/a.
-                </p>
-                <a href="#info-completa" class="mt-10 inline-block bg-accent text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-accent-hover transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 reveal cta-glow" style="transition-delay: 1.2s;">
-                    Aprender más
-                </a>
-            </div>
-        </section>
-
-        <!-- ===== SECCIÓN DE INFORMACIÓN DETALLADA ===== -->
-        <section id="info-completa" class="py-20 md:py-32 bg-surface">
-            <div class="container mx-auto px-6">
-                <div class="text-center max-w-3xl mx-auto reveal">
-                    <span class="font-display text-accent font-semibold">Información Detallada</span>
-                    <h2 class="font-display text-3xl md:text-4xl font-bold mt-2 mb-6 tracking-tight">Comprendiendo la Bulimia Nerviosa</h2>
-                    <p class="text-secondary text-lg">
-                        Aquí encontrarás información clave para entender qué es, sus causas, síntomas y cómo se puede tratar.
-                    </p>
+        <!-- ===== LOADER ===== -->
+        <div id="loader-wrapper">
+            <canvas id="rain-canvas"></canvas>
+            <div class="loader-content">
+                <p class="loader-text font-display">Sanvy corporation</p>
+                <div class="loader-bar-container">
+                    <div class="loader-bar"></div>
                 </div>
-                <div class="mt-16 space-y-16 max-w-5xl mx-auto">
-                    <!-- 1. ¿Qué es la bulimia nerviosa? -->
-                    <div id="definicion-detallada" class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center reveal">
-                        <div class="order-2 md:order-1">
-                            <h3 class="font-display font-bold text-2xl mb-4 text-primary flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-                                <span class="ml-3">1. ¿Qué es la bulimia nerviosa?</span>
+            </div>
+            <audio id="lofi-music">
+                <source src="music.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <!-- ===== CONTROL DE VOLUMEN ===== -->
+        <div id="volume-control">
+            <button id="volume-button"></button>
+            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5">
+        </div>
+
+        <!-- ===== HEADER ===== -->
+        <header id="header" class="fixed top-0 left-0 w-full bg-surface/0 backdrop-blur-sm z-50">
+            <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="#" class="font-display font-bold text-2xl text-primary tracking-tighter">Hablemos.</a>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#info-completa" class="text-secondary hover:text-accent transition-colors duration-300">Información</a>
+                    <a href="#ayuda" class="bg-accent text-white px-5 py-2 rounded-lg font-medium hover:bg-accent-hover transition-all duration-300 shadow-sm hover:shadow-md transform hover:translate-y-1">Buscar Ayuda</a>
+                </nav>
+                <button id="menu-btn" class="md:hidden z-50">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-screen bg-surface">
+                <nav class="flex flex-col items-center justify-center h-full space-y-8">
+                    <a href="#info-completa" class="text-secondary hover:text-accent text-2xl font-display">Información</a>
+                    <a href="#ayuda" class="bg-accent text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-accent-hover transition-all duration-300 transform hover:translate-y-1">Buscar Ayuda</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <!-- ===== HERO SECTION + JUEGO ===== -->
+            <section class="min-h-screen pt-24 pb-12 md:pt-32 flex flex-col items-center justify-center bg-background">
+                <div class="container mx-auto px-6 text-center">
+                    <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold !leading-tight tracking-tighter hero-title">
+                        Hablemos sobre la Bulimia.
+                    </h1>
+                    <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-secondary reveal" style="transition-delay: 1s;">
+                        Es un tema serio, pero informarse y hablar es el primer paso para ayudar y entender. No estás solo/a.
+                    </p>
+                    <a href="#info-completa" class="mt-10 inline-block bg-accent text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-accent-hover transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 reveal cta-glow" style="transition-delay: 1.2s;">
+                        Aprender más
+                    </a>
+                </div>
+
+                <!-- ===== MINIJUEGO: ENCUENTRA LA PALABRA ===== -->
+                <div id="word-game-container" class="mt-16 md:mt-20 w-full max-w-4xl mx-auto text-center reveal px-4" style="transition-delay: 1.4s;">
+                    <!-- Lista de palabras a encontrar -->
+                    <div class="mb-4">
+                        <h3 class="font-display text-xl font-bold text-primary">Palabras a encontrar:</h3>
+                        <div id="words-to-find" class="flex flex-wrap justify-center gap-x-4 gap-y-2 mt-2 text-secondary text-lg">
+                            <!-- Las 4 palabras se insertarán aquí dinámicamente -->
+                        </div>
+                    </div>
+
+                    <!-- Contenedor principal del juego -->
+                    <div class="bg-surface p-6 sm:p-8 rounded-lg shadow-lg relative min-h-[300px]">
+                        <p class="text-secondary mb-2">Selecciona las letras en el orden correcto para descubrir la palabra secreta.</p>
+                        
+                        <!-- Stats del juego -->
+                        <div class="flex justify-between items-center mb-4 text-sm font-medium text-secondary">
+                            <span id="game-word-counter">Palabra 1 / 4</span>
+                            <span id="game-attempts-counter">Intentos restantes: 3</span>
+                        </div>
+
+                        <!-- Área de la palabra actual -->
+                        <div id="current-word-display" class="flex justify-center gap-2 text-3xl sm:text-4xl font-bold font-display tracking-widest text-primary mb-6 h-12">
+                            <!-- Las letras/guiones se insertarán aquí -->
+                        </div>
+
+                        <!-- Opciones de letras -->
+                        <div id="letter-options" class="flex flex-wrap justify-center gap-2 sm:gap-3">
+                            <!-- Los botones de letras se insertarán aquí -->
+                        </div>
+
+                        <!-- Mensaje de Feedback -->
+                        <div id="game-feedback" class="absolute inset-0 bg-surface/90 backdrop-blur-sm flex flex-col justify-center items-center rounded-lg opacity-0 pointer-events-none transition-opacity duration-300">
+                            <p id="feedback-message" class="text-3xl font-bold font-display text-center"></p>
+                            <button id="feedback-button" class="mt-4 bg-accent text-white px-6 py-2 rounded-lg font-medium hover:bg-accent-hover transition-colors">Continuar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SECCIÓN DE INFORMACIÓN DETALLADA ===== -->
+            <section id="info-completa" class="py-20 md:py-32 bg-surface">
+                <div class="container mx-auto px-6">
+                    <div class="text-center max-w-3xl mx-auto reveal">
+                        <span class="font-display text-accent font-semibold">Información Detallada</span>
+                        <h2 class="font-display text-3xl md:text-4xl font-bold mt-2 mb-6 tracking-tight">Comprendiendo la Bulimia Nerviosa</h2>
+                        <p class="text-secondary text-lg">
+                            Aquí encontrarás información clave para entender qué es, sus causas, síntomas y cómo se puede tratar.
+                        </p>
+                    </div>
+                    <div class="mt-16 space-y-16 max-w-5xl mx-auto">
+                        <!-- Contenido informativo... -->
+                        <div id="definicion-detallada" class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center reveal">
+                            <div class="order-2 md:order-1">
+                                <h3 class="font-display font-bold text-2xl mb-4 text-primary flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                                    <span class="ml-3">1. ¿Qué es la bulimia nerviosa?</span>
+                                </h3>
+                                <p class="text-secondary text-lg leading-relaxed">
+                                    La bulimia nerviosa es un trastorno de la conducta alimentaria grave y potencialmente mortal. A diferencia de la anorexia, las personas con bulimia suelen tener un peso normal o sobrepeso. La característica principal es un ciclo de atracones seguidos de conductas compensatorias.
+                                </p>
+                                <ul class="mt-4 space-y-2 text-secondary text-lg list-disc list-inside">
+                                    <li><b>Atracones:</b> Ingerir mucha comida en poco tiempo, con sensación de pérdida de control.</li>
+                                    <li><b>Conductas compensatorias:</b> Acciones para "compensar" el atracón, como el vómito autoinducido, uso de laxantes, ayuno o ejercicio excesivo.</li>
+                                </ul>
+                            </div>
+                            <div class="order-1 md:order-2">
+                                <img src="https://i.ibb.co/5gXBgm75/gogeable.jpg" alt="Persona recibiendo apoyo y consuelo" class="rounded-lg shadow-xl w-full h-auto object-cover aspect-square">
+                            </div>
+                        </div>
+                        <div id="causas-factores" class="bg-background p-8 md:p-12 rounded-lg shadow-md reveal info-card">
+                            <h3 class="font-display font-bold text-2xl mb-6 text-primary flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M12.5 2.5l-3 3-3-3-3 3-3-3"></path><path d="M12.5 8.5l-3 3-3-3-3 3-3-3"></path><path d="M12.5 14.5l-3 3-3-3-3 3-3-3"></path><path d="M12.5 20.5l-3 3-3-3-3 3-3-3"></path></svg>
+                                <span class="ml-3">2. Causas y factores de riesgo</span>
                             </h3>
-                            <p class="text-secondary text-lg leading-relaxed">
-                                La bulimia nerviosa es un trastorno de la conducta alimentaria grave y potencialmente mortal. A diferencia de la anorexia, las personas con bulimia suelen tener un peso normal o sobrepeso. La característica principal es un ciclo de atracones seguidos de conductas compensatorias.
-                            </p>
-                            <ul class="mt-4 space-y-2 text-secondary text-lg list-disc list-inside">
-                                <li><b>Atracones:</b> Ingerir mucha comida en poco tiempo, con sensación de pérdida de control.</li>
-                                <li><b>Conductas compensatorias:</b> Acciones para "compensar" el atracón, como el vómito autoinducido, uso de laxantes, ayuno o ejercicio excesivo.</li>
+                            <p class="text-secondary text-lg leading-relaxed mb-6">La bulimia no tiene una causa única, sino que es el resultado de una combinación de factores:</p>
+                            <div class="grid md:grid-cols-3 gap-8 text-secondary text-lg">
+                            <div><h4 class="font-bold text-primary mb-2">Psicológicos:</h4><p>Baja autoestima, imagen corporal negativa, perfeccionismo y dificultad para manejar el estrés, la ansiedad o la depresión.</p></div>
+                            <div><h4 class="font-bold text-primary mb-2">Biológicos:</h4><p>Predisposición genética y posibles desequilibrios en neurotransmisores como la serotonina (que regula el ánimo y el apetito).</p></div>
+                            <div><h4 class="font-bold text-primary mb-2">Socioculturales:</h4><p>Presión social por un ideal de delgadez y la influencia de imágenes de cuerpos "perfectos" en redes sociales y medios.</p></div>
+                            </div>
+                        </div>
+                        <div id="sintomas-alertas" class="bg-surface p-8 md:p-12 rounded-lg shadow-md reveal info-card">
+                            <h3 class="font-display font-bold text-2xl mb-6 text-primary flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                                <span class="ml-3">3. Síntomas y señales de alerta</span>
+                            </h3>
+                            <p class="text-secondary text-lg leading-relaxed mb-6">Los síntomas pueden ser difíciles de detectar porque se suelen ocultar. Algunas señales son:</p>
+                            <div class="grid md:grid-cols-2 gap-8">
+                                <div><h4 class="font-bold text-primary mb-2">Cambios en el comportamiento:</h4><ul class="space-y-2 text-secondary text-lg list-disc list-inside"><li>Preocupación extrema por el peso.</li><li>Cambios de humor y aislamiento social.</li><li>Ir al baño con frecuencia después de comer.</li></ul></div>
+                                <div><h4 class="font-bold text-primary mb-2">Síntomas físicos y problemas de salud:</h4><ul class="space-y-2 text-secondary text-lg list-disc list-inside"><li>Cara hinchada por inflamación de glándulas.</li><li>Erosión dental y callos en los nudillos (signo de Russell).</li><li>Fatiga, deshidratación y arritmias cardíacas.</li></ul></div>
+                            </div>
+                        </div>
+                        <div id="tratamiento-recuperacion" class="bg-background p-8 md:p-12 rounded-lg shadow-md reveal info-card">
+                            <h3 class="font-display font-bold text-2xl mb-6 text-primary flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                                <span class="ml-3">4. Tratamiento y recuperación</span>
+                            </h3>
+                            <p class="text-secondary text-lg leading-relaxed mb-6">El tratamiento es integral y aborda las causas de fondo, no solo la comida. La recuperación es posible.</p>
+                            <ul class="space-y-4 text-secondary text-lg">
+                                <li><b>Terapia psicológica:</b> La Terapia Cognitivo-Conductual (TCC) es muy efectiva para cambiar pensamientos y comportamientos dañinos.</li>
+                                <li><b>Asesoramiento nutricional:</b> Un profesional ayuda a establecer un patrón de alimentación saludable y a desmitificar creencias sobre la comida.</li>
+                                <li><b>Medicación:</b> A veces, los antidepresivos pueden ayudar a reducir los atracones y tratar la ansiedad o depresión.</li>
                             </ul>
                         </div>
-                        <div class="order-1 md:order-2">
-                             <img src="https://i.ibb.co/5gXBgm75/gogeable.jpg" alt="Persona recibiendo apoyo y consuelo" class="rounded-lg shadow-xl w-full h-auto object-cover aspect-square">
-                        </div>
-                    </div>
-    
-                    <!-- 2. Causas y factores de riesgo -->
-                    <div id="causas-factores" class="bg-background p-8 md:p-12 rounded-lg shadow-md reveal info-card">
-                        <h3 class="font-display font-bold text-2xl mb-6 text-primary flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M12.5 2.5l-3 3-3-3-3 3-3-3"></path><path d="M12.5 8.5l-3 3-3-3-3 3-3-3"></path><path d="M12.5 14.5l-3 3-3-3-3 3-3-3"></path><path d="M12.5 20.5l-3 3-3-3-3 3-3-3"></path></svg>
-                            <span class="ml-3">2. Causas y factores de riesgo</span>
-                        </h3>
-                        <p class="text-secondary text-lg leading-relaxed mb-6">La bulimia no tiene una causa única, sino que es el resultado de una combinación de factores:</p>
-                        <div class="grid md:grid-cols-3 gap-8 text-secondary text-lg">
-                           <div>
-                                <h4 class="font-bold text-primary mb-2">Psicológicos:</h4>
-                                <p>Baja autoestima, imagen corporal negativa, perfeccionismo y dificultad para manejar el estrés, la ansiedad o la depresión.</p>
-                           </div>
-                           <div>
-                                <h4 class="font-bold text-primary mb-2">Biológicos:</h4>
-                                <p>Predisposición genética y posibles desequilibrios en neurotransmisores como la serotonina (que regula el ánimo y el apetito).</p>
-                           </div>
-                           <div>
-                                <h4 class="font-bold text-primary mb-2">Socioculturales:</h4>
-                                <p>Presión social por un ideal de delgadez y la influencia de imágenes de cuerpos "perfectos" en redes sociales y medios.</p>
-                           </div>
-                        </div>
-                    </div>
-    
-                    <!-- 3. Síntomas y señales de alerta -->
-                    <div id="sintomas-alertas" class="bg-surface p-8 md:p-12 rounded-lg shadow-md reveal info-card">
-                         <h3 class="font-display font-bold text-2xl mb-6 text-primary flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                            <span class="ml-3">3. Síntomas y señales de alerta</span>
-                         </h3>
-                         <p class="text-secondary text-lg leading-relaxed mb-6">Los síntomas pueden ser difíciles de detectar porque se suelen ocultar. Algunas señales son:</p>
-                         <div class="grid md:grid-cols-2 gap-8">
-                             <div>
-                                 <h4 class="font-bold text-primary mb-2">Cambios en el comportamiento:</h4>
-                                 <ul class="space-y-2 text-secondary text-lg list-disc list-inside">
-                                     <li>Preocupación extrema por el peso.</li>
-                                     <li>Cambios de humor y aislamiento social.</li>
-                                     <li>Ir al baño con frecuencia después de comer.</li>
-                                 </ul>
-                             </div>
-                             <div>
-                                 <h4 class="font-bold text-primary mb-2">Síntomas físicos y problemas de salud:</h4>
-                                 <ul class="space-y-2 text-secondary text-lg list-disc list-inside">
-                                    <li>Cara hinchada por inflamación de glándulas.</li>
-                                    <li>Erosión dental y callos en los nudillos (signo de Russell).</li>
-                                    <li>Fatiga, deshidratación y arritmias cardíacas.</li>
-                                 </ul>
-                             </div>
-                         </div>
-                    </div>
-    
-                    <!-- 4. Tratamiento y recuperación -->
-                    <div id="tratamiento-recuperacion" class="bg-background p-8 md:p-12 rounded-lg shadow-md reveal info-card">
-                         <h3 class="font-display font-bold text-2xl mb-6 text-primary flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                            <span class="ml-3">4. Tratamiento y recuperación</span>
-                         </h3>
-                         <p class="text-secondary text-lg leading-relaxed mb-6">El tratamiento es integral y aborda las causas de fondo, no solo la comida. La recuperación es posible.</p>
-                         <ul class="space-y-4 text-secondary text-lg">
-                             <li><b>Terapia psicológica:</b> La Terapia Cognitivo-Conductual (TCC) es muy efectiva para cambiar pensamientos y comportamientos dañinos.</li>
-                             <li><b>Asesoramiento nutricional:</b> Un profesional ayuda a establecer un patrón de alimentación saludable y a desmitificar creencias sobre la comida.</li>
-                             <li><b>Medicación:</b> A veces, los antidepresivos pueden ayudar a reducir los atracones y tratar la ansiedad o depresión.</li>
-                         </ul>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- ===== SECCIÓN DE TESTIMONIO/MENSAJE ===== -->
-        <section class="py-20 md:py-32">
-            <div class="container mx-auto px-6 reveal">
-                <div class="max-w-4xl mx-auto">
-                    <blockquote class="text-center">
-                        <p class="text-xl md:text-2xl font-medium text-primary">
-                           “Hablar de lo que me pasaba fue lo más difícil, pero también lo que me salvó. Pedir ayuda no es de débiles, es de valientes. La recuperación es un camino, pero es posible.”
-                        </p>
-                        <footer class="mt-8">
-                            <p class="font-bold text-lg">- Anónimo</p>
-                        </footer>
-                    </blockquote>
+            <!-- ===== SECCIÓN DE TESTIMONIO/MENSAJE ===== -->
+            <section class="py-20 md:py-32">
+                <div class="container mx-auto px-6 reveal">
+                    <div class="max-w-4xl mx-auto"><blockquote class="text-center"><p class="text-xl md:text-2xl font-medium text-primary">“Hablar de lo que me pasaba fue lo más difícil, pero también lo que me salvó. Pedir ayuda no es de débiles, es de valientes. La recuperación es un camino, pero es posible.”</p><footer class="mt-8"><p class="font-bold text-lg">- Anónimo</p></footer></blockquote></div>
                 </div>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
 
-    <!-- ===== FOOTER / AYUDA ===== -->
-    <footer id="ayuda" class="bg-background py-16">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="font-display text-3xl font-bold reveal">Pedir ayuda es el paso más importante.</h2>
-            <p class="text-secondary mt-4 max-w-2xl mx-auto reveal" style="transition-delay: 150ms;">
-                Si vos o alguien que conocés necesita ayuda, no duden en buscarla. Hay personas dispuestas a escuchar y acompañar.
-            </p>
-            <div class="mt-8 reveal" style="transition-delay: 300ms;">
-                <p class="font-bold text-lg">Recursos en Argentina:</p>
-                <div class="mt-4 space-y-2">
-                    <p class="text-secondary"><b>ALUBA:</b> 011-4306-0033 / 0800-222-5822</p>
-                    <p class="text-secondary"><b>La Casita:</b> 011-4786-2352 / 011-15-4412-2575</p>
-                    <p class="text-secondary"><b>Salud Mental Responde (CABA):</b> 0800-333-1665</p>
+        <!-- ===== FOOTER / AYUDA ===== -->
+        <footer id="ayuda" class="bg-background py-16">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="font-display text-3xl font-bold reveal">Pedir ayuda es el paso más importante.</h2>
+                <p class="text-secondary mt-4 max-w-2xl mx-auto reveal" style="transition-delay: 150ms;">Si vos o alguien que conocés necesita ayuda, no duden en buscarla. Hay personas dispuestas a escuchar y acompañar.</p>
+                <div class="mt-8 reveal" style="transition-delay: 300ms;">
+                    <p class="font-bold text-lg">Recursos en Argentina:</p>
+                    <div class="mt-4 space-y-2">
+                        <p class="text-secondary"><b>ALUBA:</b> 011-4306-0033 / 0800-222-5822</p>
+                        <p class="text-secondary"><b>La Casita:</b> 011-4786-2352 / 011-15-4412-2575</p>
+                        <p class="text-secondary"><b>Salud Mental Responde (CABA):</b> 0800-333-1665</p>
+                    </div>
                 </div>
+                <p class="text-secondary text-sm mt-12">© <span id="year"></span> Exposición de Ciudadanía. Esta página es un recurso informativo.</p>
             </div>
-           
-            <p class="text-secondary text-sm mt-12">
-                © <span id="year"></span> Exposición de Ciudadanía. Esta página es un recurso informativo.
-            </p>
-        </div>
-    </footer>
+        </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- ELEMENTOS ---
-            const loader = document.getElementById('loader-wrapper');
-            const lofiMusic = document.getElementById('lofi-music');
-            const volumeButton = document.getElementById('volume-button');
-            const volumeSlider = document.getElementById('volume-slider');
-            let userHasInteracted = false;
-            let fadeInterval;
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                // --- ELEMENTOS ---
+                const loader = document.getElementById('loader-wrapper');
+                const lofiMusic = document.getElementById('lofi-music');
+                const volumeButton = document.getElementById('volume-button');
+                const volumeSlider = document.getElementById('volume-slider');
+                let userHasInteracted = false;
+                let fadeInterval;
 
-            // --- ICONOS DE VOLUMEN (SVG) ---
-            const icons = {
-                muted: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>`,
-                low: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`,
-                high: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`
-            };
-            
-            // --- LÓGICA DE MÚSICA ---
-            const setVolumeIcon = (volume) => {
-                if (lofiMusic.muted || volume === 0) volumeButton.innerHTML = icons.muted;
-                else if (volume < 0.5) volumeButton.innerHTML = icons.low;
-                else volumeButton.innerHTML = icons.high;
-            };
+                // --- ICONOS DE VOLUMEN (SVG) ---
+                const icons = {
+                    muted: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>`,
+                    low: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`,
+                    high: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`
+                };
+                
+                // --- LÓGICA DE MÚSICA ---
+                const setVolumeIcon = (volume) => {
+                    if (lofiMusic.muted || volume === 0) volumeButton.innerHTML = icons.muted;
+                    else if (volume < 0.5) volumeButton.innerHTML = icons.low;
+                    else volumeButton.innerHTML = icons.high;
+                };
 
-            const fadeAudio = (targetVolume, duration = 1000) => {
-                clearInterval(fadeInterval);
-                const startVolume = lofiMusic.volume;
-                const step = (targetVolume - startVolume) / (duration / 50);
-                fadeInterval = setInterval(() => {
-                    const newVolume = lofiMusic.volume + step;
-                    if ((step > 0 && newVolume >= targetVolume) || (step < 0 && newVolume <= targetVolume)) {
-                        lofiMusic.volume = targetVolume;
-                        clearInterval(fadeInterval);
-                        if (targetVolume === 0) lofiMusic.pause();
-                    } else {
-                        lofiMusic.volume = newVolume;
+                const fadeAudio = (targetVolume, duration = 1000) => {
+                    clearInterval(fadeInterval);
+                    const startVolume = lofiMusic.volume;
+                    const step = (targetVolume - startVolume) / (duration / 50);
+                    fadeInterval = setInterval(() => {
+                        const newVolume = lofiMusic.volume + step;
+                        if ((step > 0 && newVolume >= targetVolume) || (step < 0 && newVolume <= targetVolume)) {
+                            lofiMusic.volume = targetVolume;
+                            clearInterval(fadeInterval);
+                            if (targetVolume === 0) lofiMusic.pause();
+                        } else {
+                            lofiMusic.volume = newVolume;
+                        }
+                        setVolumeIcon(lofiMusic.volume);
+                    }, 50);
+                };
+
+                const playMusic = () => {
+                    lofiMusic.currentTime = 0;
+                    lofiMusic.volume = 0;
+                    setVolumeIcon(0);
+                    const playPromise = lofiMusic.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            fadeAudio(parseFloat(volumeSlider.value));
+                        }).catch(error => {
+                            console.log("La reproducción automática fue bloqueada. Se necesita interacción del usuario.");
+                            document.body.addEventListener('click', () => {
+                            if(lofiMusic.paused && !userHasInteracted) {
+                                userHasInteracted = true;
+                                playMusic();
+                            }
+                            }, { once: true });
+                        });
                     }
-                    setVolumeIcon(lofiMusic.volume);
-                }, 50);
-            };
+                };
+                
+                lofiMusic.addEventListener('ended', () => {
+                    setTimeout(() => playMusic(), 1000); // 1s delay before looping
+                });
+                
+                volumeButton.addEventListener('click', () => {
+                    lofiMusic.muted = !lofiMusic.muted;
+                    setVolumeIcon(lofiMusic.muted ? 0 : lofiMusic.volume);
+                });
+                
+                volumeSlider.addEventListener('input', (e) => {
+                    const newVolume = parseFloat(e.target.value);
+                    lofiMusic.volume = newVolume;
+                    if(lofiMusic.muted && newVolume > 0) lofiMusic.muted = false;
+                    setVolumeIcon(newVolume);
+                });
+                
+                // --- INICIO DE TODO ---
+                setVolumeIcon(parseFloat(volumeSlider.value)); // Set initial icon
+                setTimeout(() => {
+                    loader.classList.add('hidden');
+                    setTimeout(() => playMusic(), 500); // 0.5s delay after loader
+                }, 1500);
 
-            const playMusic = () => {
-                lofiMusic.currentTime = 0;
-                lofiMusic.volume = 0;
-                setVolumeIcon(0);
-                const playPromise = lofiMusic.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        fadeAudio(parseFloat(volumeSlider.value));
-                    }).catch(error => {
-                        console.log("La reproducción automática fue bloqueada. Se necesita interacción del usuario.");
-                        // Handle browsers that block autoplay strictly
-                        document.body.addEventListener('click', () => {
-                           if(lofiMusic.paused && !userHasInteracted) {
-                               userHasInteracted = true;
-                               playMusic();
-                           }
-                        }, { once: true });
+                // --- Lógica del menú móvil ---
+                const menuBtn = document.getElementById('menu-btn');
+                const mobileMenu = document.getElementById('mobile-menu');
+                const navLinks = document.querySelectorAll('header a[href^="#"]');
+                const toggleMenu = () => {
+                    const isMenuOpen = !mobileMenu.classList.contains('hidden');
+                    mobileMenu.classList.toggle('hidden');
+                    document.body.style.overflow = isMenuOpen ? 'auto' : 'hidden';
+                    menuBtn.innerHTML = isMenuOpen 
+                        ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`
+                        : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+                };
+                menuBtn.addEventListener('click', toggleMenu);
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (!mobileMenu.classList.contains('hidden')) toggleMenu();
+                    });
+                });
+
+                // --- Lógica para animaciones al hacer scroll ---
+                const revealElements = document.querySelectorAll('.reveal');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, { threshold: 0.1 });
+                revealElements.forEach(element => observer.observe(element));
+                
+                // --- Lógica para animar el título del Hero ---
+                const heroTitle = document.querySelector('.hero-title');
+                if(heroTitle && heroTitle.textContent) {
+                    const words = heroTitle.textContent.trim().split(' ');
+                    heroTitle.innerHTML = '';
+                    words.forEach((word, index) => {
+                        const wordSpan = document.createElement('span');
+                        wordSpan.textContent = word;
+                        wordSpan.style.animationDelay = `${index * 0.1 + 1.5}s`;
+                        heroTitle.appendChild(wordSpan);
+                        if (index < words.length - 1) heroTitle.append(' ');
                     });
                 }
-            };
-            
-            lofiMusic.addEventListener('ended', () => {
-                setTimeout(() => playMusic(), 1000); // 1s delay before looping
-            });
-            
-            volumeButton.addEventListener('click', () => {
-                lofiMusic.muted = !lofiMusic.muted;
-                setVolumeIcon(lofiMusic.muted ? 0 : lofiMusic.volume);
-            });
-            
-            volumeSlider.addEventListener('input', (e) => {
-                const newVolume = parseFloat(e.target.value);
-                lofiMusic.volume = newVolume;
-                if(lofiMusic.muted && newVolume > 0) lofiMusic.muted = false;
-                setVolumeIcon(newVolume);
-            });
-            
-            // --- INICIO DE TODO ---
-            setVolumeIcon(parseFloat(volumeSlider.value)); // Set initial icon
-            setTimeout(() => {
-                loader.classList.add('hidden');
-                setTimeout(() => playMusic(), 500); // 0.5s delay after loader
-            }, 1500);
+                
+                // --- Lógica para la sombra del header ---
+                const header = document.getElementById('header');
+                window.addEventListener('scroll', () => {
+                    header.classList.toggle('scrolled', window.scrollY > 10);
+                });
 
-            // --- Lógica del menú móvil ---
-            const menuBtn = document.getElementById('menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const navLinks = document.querySelectorAll('header a[href^="#"]');
-            const toggleMenu = () => {
-                const isMenuOpen = !mobileMenu.classList.contains('hidden');
-                mobileMenu.classList.toggle('hidden');
-                document.body.style.overflow = isMenuOpen ? 'auto' : 'hidden';
-                menuBtn.innerHTML = isMenuOpen 
-                    ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`
-                    : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
-            };
-            menuBtn.addEventListener('click', toggleMenu);
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                     if (!mobileMenu.classList.contains('hidden')) toggleMenu();
-                });
-            });
-
-            // --- Lógica para animaciones al hacer scroll (CORREGIDO) ---
-            const revealElements = document.querySelectorAll('.reveal');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) { // <-- AQUÍ ESTABA EL ERROR
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-            revealElements.forEach(element => observer.observe(element));
-            
-            // --- Lógica para animar el título del Hero ---
-            const heroTitle = document.querySelector('.hero-title');
-            if(heroTitle && heroTitle.textContent) {
-                const words = heroTitle.textContent.trim().split(' ');
-                heroTitle.innerHTML = '';
-                words.forEach((word, index) => {
-                    const wordSpan = document.createElement('span');
-                    wordSpan.textContent = word;
-                    wordSpan.style.animationDelay = `${index * 0.1 + 1.5}s`;
-                    heroTitle.appendChild(wordSpan);
-                    if (index < words.length - 1) heroTitle.append(' ');
-                });
-            }
-            
-            // --- Lógica para la sombra del header ---
-            const header = document.getElementById('header');
-            window.addEventListener('scroll', () => {
-                header.classList.toggle('scrolled', window.scrollY > 10);
-            });
-
-            // --- Lógica para la animación de lluvia ---
-            const canvas = document.getElementById('rain-canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            let drops = [];
-            for (let i = 0; i < 100; i++) {
-                drops.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    length: Math.random() * 20 + 10,
-                    speed: Math.random() * 5 + 2,
-                });
-            }
-            function drawRain() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.strokeStyle = 'rgba(175, 215, 235, 0.3)';
-                ctx.lineWidth = 1;
-                for (let i = 0; i < drops.length; i++) {
-                    let drop = drops[i];
-                    ctx.beginPath();
-                    ctx.moveTo(drop.x, drop.y);
-                    ctx.lineTo(drop.x, drop.y + drop.length);
-                    ctx.stroke();
-                    drop.y += drop.speed;
-                    if (drop.y > canvas.height) {
-                        drop.y = -drop.length;
-                        drop.x = Math.random() * canvas.width;
-                    }
-                }
-                requestAnimationFrame(drawRain);
-            }
-            drawRain();
-            window.addEventListener('resize', () => {
+                // --- Lógica para la animación de lluvia ---
+                const canvas = document.getElementById('rain-canvas');
+                const ctx = canvas.getContext('2d');
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
-            });
+                let drops = [];
+                for (let i = 0; i < 100; i++) {
+                    drops.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        length: Math.random() * 20 + 10,
+                        speed: Math.random() * 5 + 2,
+                    });
+                }
+                function drawRain() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.strokeStyle = 'rgba(175, 215, 235, 0.3)';
+                    ctx.lineWidth = 1;
+                    for (let i = 0; i < drops.length; i++) {
+                        let drop = drops[i];
+                        ctx.beginPath();
+                        ctx.moveTo(drop.x, drop.y);
+                        ctx.lineTo(drop.x, drop.y + drop.length);
+                        ctx.stroke();
+                        drop.y += drop.speed;
+                        if (drop.y > canvas.height) {
+                            drop.y = -drop.length;
+                            drop.x = Math.random() * canvas.width;
+                        }
+                    }
+                    requestAnimationFrame(drawRain);
+                }
+                drawRain();
+                window.addEventListener('resize', () => {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                });
 
-            // --- Actualizar año del footer ---
-            document.getElementById('year').textContent = new Date().getFullYear();
-        });
-    </script>
-</body>
-</html>
+                document.getElementById('year').textContent = new Date().getFullYear();
+
+                const gameContainer = document.getElementById('word-game-container');
+                if (gameContainer) {
+                    const wordsToFindContainer = document.getElementById('words-to-find');
+                    const wordCounterEl = document.getElementById('game-word-counter');
+                    const attemptsCounterEl = document.getElementById('game-attempts-counter');
+                    const currentWordDisplay = document.getElementById('current-word-display');
+                    const letterOptionsContainer = document.getElementById('letter-options');
+                    const feedbackContainer = document.getElementById('game-feedback');
+                    const feedbackMessage = document.getElementById('feedback-message');
+                    const feedbackButton = document.getElementById('feedback-button');
+
+const wordList = [
+    'APOYO', 'AMISTAD', 'ESCUCHA', 'FUERZA', 'SALUD', 'BIENESTAR', 'CONFIANZA', 
+    'VALOR', 'RESPETO', 'CUIDADO', 'ANIMO', 'ESPERANZA', 'FAMILIA', 'TERAPIA', 
+    'AYUDA', 'PROGRESO', 'PACIENCIA', 'AMOR', 'VIDA', 'SONRISA', 'ABRAZO', 
+    'CALMA', 'SERENIDAD', 'EQUILIBRIO', 'ARMONIA', 'POSITIVO', 'ADELANTE', 
+    'JUNTOS', 'ACOMPAÑAR', 'SANAR', 'DIALOGO', 'EMPATIA',
+
+    // 100 palabras nuevas relacionadas con bulimia, salud y recuperación
+    'RECUPERAR', 'VOLUNTAD', 'CORAJE', 'ESFUERZO', 'LUZ', 'APRENDIZAJE', 
+    'CUIDARSE', 'ACEPTAR', 'LIBERTAD', 'AUTOESTIMA', 'CRECER', 'VALENTIA', 
+    'TRANQUILIDAD', 'PERDON', 'RENACER', 'PAZ', 'CLARIDAD', 'CONSCIENCIA', 
+    'SINCERIDAD', 'FORTALEZA', 'LOGRO', 'META', 'DESCANSO', 'REFUGIO', 
+    'CONEXION', 'VINCULO', 'RESPIRAR', 'MOTIVACION', 'ALEGRIA', 'SEGURIDAD', 
+    'BALANCE', 'INSPIRACION', 'CUIDARNOS', 'RESPIRACION', 'MEDITACION', 
+    'NUTRICION', 'ENERGIA', 'SINCERO', 'DEDICACION', 'OPTIMISMO', 'PODER', 
+    'SOPORTE', 'HABITOS', 'CREER', 'ESPERAR', 'DECISION', 'VALENTINA', 
+    'DULZURA', 'CERCANIA', 'SALVAR', 'SUPERACION', 'HORIZONTE', 'ILUSION', 
+    'TRANSFORMAR', 'PROTECCION', 'CONSTANCIA', 'DISCIPLINA', 'HUMILDAD', 
+    'SERENAR', 'CREATIVIDAD', 'CONOCER', 'FLEXIBILIDAD', 'SABIDURIA', 
+    'ENTENDIMIENTO', 'ESCAPE', 'LUCHAR', 'OBJETIVO', 'TRIUNFO', 'UNION', 
+    'CONSTRUCCION', 'GRATITUD', 'PROGRESAR', 'MIRADA', 'ESPERAR', 'INICIAR', 
+    'SERENAR', 'ENFOQUE', 'PERSISTENCIA', 'CERCANOS', 'SINCEROS', 'BONDAD', 
+    'RECOMPENSA', 'DESCUBRIR', 'LUCHA', 'HORIZONTES', 'IMAGINAR', 'MERECER', 
+    'HABITAR', 'CONSTRUIR', 'SENTIR', 'EXPRESAR', 'CUIDAR', 'SOSTENER', 
+    'COMPARTIR', 'GUIA', 'ALIVIO', 'APRECIAR', 'MEJORAR', 'CAMBIO', 
+    'RENOVAR', 'ESPERAR', 'PROBAR', 'FUTURO', 'FUERZAS', 'HUMANIDAD', 
+    'REFLEXION', 'ILUMINAR', 'CRECIMIENTO', 'ACTITUD', 'DIGNIDAD', 'PLENITUD', 
+    'ENCONTRAR', 'AVANZAR', 'CAMINAR', 'NUEVO', 'SENTIDO', 'REPOSO'
+];
+
+
+                    let gameWords = [];
+                    let currentWordIndex = 0;
+                    let currentWord = '';
+                    let lettersGuessed = '';
+                    let attemptsLeft = 3;
+
+                    const shuffleArray = (array) => {
+                        for (let i = array.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [array[i], array[j]] = [array[j], array[i]];
+                        }
+                        return array;
+                    };
+
+                    const selectRandomWords = () => {
+                        gameWords = shuffleArray([...wordList]).slice(0, 4);
+                    };
+
+                    const setupNextWord = () => {
+                        if (currentWordIndex >= gameWords.length) {
+                            showFeedback('¡Felicidades!', 'Has encontrado todas las palabras.', 'Jugar de Nuevo', initGame);
+                            return;
+                        }
+                        currentWord = gameWords[currentWordIndex];
+                        lettersGuessed = '';
+                        attemptsLeft = 3;
+                        updateStats();
+                        renderPlaceholders();
+                        renderLetterOptions();
+                    };
+
+                    const updateStats = () => {
+                        wordCounterEl.textContent = `Palabra ${currentWordIndex + 1} / 4`;
+                        attemptsCounterEl.textContent = `Intentos restantes: ${attemptsLeft}`;
+                    };
+
+                    const renderPlaceholders = () => {
+                        currentWordDisplay.innerHTML = '';
+                        currentWord.split('').forEach(() => {
+                            const placeholder = document.createElement('div');
+                            placeholder.className = 'letter-placeholder';
+                            currentWordDisplay.appendChild(placeholder);
+                        });
+                    };
+
+                    const renderLetterOptions = () => {
+                        letterOptionsContainer.innerHTML = '';
+                        const shuffledLetters = shuffleArray([...currentWord]);
+                        shuffledLetters.forEach(letter => {
+                            const button = document.createElement('button');
+                            button.className = 'letter-option bg-surface shadow-md hover:bg-gray-200 font-bold font-display text-2xl w-12 h-12 rounded-lg';
+                            button.textContent = letter;
+                            button.addEventListener('click', () => handleLetterClick(button, letter));
+                            letterOptionsContainer.appendChild(button);
+                        });
+                    };
+
+                    const handleLetterClick = (clickedButton, clickedLetter) => {
+                        if (clickedButton.disabled) return;
+                        const expectedLetter = currentWord[lettersGuessed.length];
+
+                        if (clickedLetter === expectedLetter) {
+                            lettersGuessed += clickedLetter;
+                            clickedButton.classList.add('correct');
+                            clickedButton.disabled = true;
+                            
+                            const placeholder = currentWordDisplay.children[lettersGuessed.length - 1];
+                            placeholder.textContent = clickedLetter;
+                            placeholder.style.borderBottom = '3px solid #22c55e';
+
+                            if (lettersGuessed.length === currentWord.length) {
+                                document.querySelector(`[data-word="${currentWord}"]`).classList.add('found');
+                                setTimeout(() => {
+                                    currentWordIndex++;
+                                    setupNextWord();
+                                }, 1200);
+                            }
+                        } else {
+                            attemptsLeft--;
+                            updateStats();
+                            clickedButton.classList.add('incorrect');
+                            setTimeout(() => clickedButton.classList.remove('incorrect'), 600);
+
+                            if (attemptsLeft <= 0) {
+                                showFeedback('¡Fallaste!', `La palabra era "${currentWord}"`, 'Reintentar', () => {
+                                    feedbackContainer.classList.remove('visible');
+                                    currentWordIndex++; 
+                                    setupNextWord();
+                                });
+                            }
+                        }
+                    };
+                    
+                    const showFeedback = (title, message, buttonText, callback) => {
+                        feedbackMessage.innerHTML = `${title}<br><span class="text-xl text-secondary font-sans font-normal">${message}</span>`;
+                        feedbackButton.textContent = buttonText;
+                        feedbackButton.onclick = () => {
+                            feedbackContainer.classList.remove('visible');
+                            setTimeout(callback, 200);
+                        };
+                        feedbackContainer.classList.add('visible');
+                    };
+                    
+                    const initGame = () => {
+                        currentWordIndex = 0;
+                        selectRandomWords();
+                        
+                        wordsToFindContainer.innerHTML = '';
+                        gameWords.forEach(word => {
+                            const wordEl = document.createElement('span');
+                            wordEl.className = 'word-to-find font-display bg-gray-200 px-3 py-1 rounded-md';
+                            wordEl.textContent = word;
+                            wordEl.dataset.word = word;
+                            wordsToFindContainer.appendChild(wordEl);
+                        });
+                        
+                        feedbackContainer.classList.remove('visible');
+                        setupNextWord();
+                    };
+
+                    initGame();
+                }
+            });
+        </script>
+    </body>
+    </html>
 
