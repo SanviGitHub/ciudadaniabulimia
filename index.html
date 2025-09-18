@@ -1,653 +1,508 @@
 <!DOCTYPE html>
-    <html lang="es" class="scroll-smooth">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Hablemos de Bulimia | Exposición de Ciudadanía</title>
-        <meta name="description" content="Una página informativa y de concientización sobre la bulimia, creada para una exposición escolar.">
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        fontFamily: {
-                            'sans': ['Inter', 'sans-serif'],
-                            'display': ['Poppins', 'sans-serif'],
-                        },
-                        colors: {
-                            'background': '#F8F9FA', // Gris muy suave
-                            'surface': '#FFFFFF', // Blanco
-                            'primary': '#111827', // Gris oscuro casi negro
-                            'secondary': '#6B7280', // Gris para textos secundarios
-                            'accent': '#38bdf8', // Azul cielo sereno
-                            'accent-hover': '#0ea5e9', // Tono más oscuro para hover
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hablemos de Bulimia | Exposición de Ciudadanía</title>
+    <meta name="description" content="Una página informativa y de concientización sobre la bulimia, con un diseño moderno y animaciones fluidas.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- AOS (Animate On Scroll) Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'display': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'background': '#0B0F19', // Azul noche profundo
+                        'surface': '#1A202C',   // Gris azulado oscuro
+                        'primary': '#F7FAFC',   // Blanco casi puro
+                        'secondary': '#A0AEC0', // Gris azulado claro
+                        'accent': '#38bdf8',     // Azul cielo sereno
+                        'accent-hover': '#0ea5e9', // Tono más oscuro para hover
+                        'success': '#34D399', // Verde esmeralda
+                        'danger': '#F87171', // Rojo suave
+                    },
+                    animation: {
+                        'aurora': 'aurora 60s linear infinite',
+                    },
+                    keyframes: {
+                        aurora: {
+                            'from': { 'background-position': '50% 50%, 50% 50%' },
+                            'to': { 'background-position': '350% 50%, 350% 50%' },
                         }
                     }
                 }
             }
-        </script>
+        }
+    </script>
+    
+    <style>
+        /* Scrollbar personalizado */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1A202C; }
+        ::-webkit-scrollbar-thumb { background-color: #4A5568; border-radius: 20px; border: 2px solid #1A202C; }
+        ::-webkit-scrollbar-thumb:hover { background-color: #718096; }
+
+        /* Estilo Header con Glassmorphism */
+        #header.scrolled {
+            background-color: rgba(11, 15, 25, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
         
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+        /* Efecto de brillo en botones */
+        .cta-glow { position: relative; overflow: hidden; }
+        .cta-glow:hover::before {
+            content: ''; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); width: 200%; padding-bottom: 200%; border-radius: 50%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.4) 0%, rgba(56, 189, 248, 0) 60%);
+            animation: glow-pulse 1.5s infinite;
+        }
+        @keyframes glow-pulse { 0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.7; } 70% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; } 100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; } }
 
-        <style>
-            ::-webkit-scrollbar { width: 8px; }
-            ::-webkit-scrollbar-track { background: #F8F9FA; }
-            ::-webkit-scrollbar-thumb { background-color: #d1d5db; border-radius: 20px; }
-            
-            /* Animaciones generales */
-            .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.6, 0.2, 0.4, 1), transform 0.8s cubic-bezier(0.6, 0.2, 0.4, 1); }
-            .reveal.visible { opacity: 1; transform: translateY(0); }
-            #header { transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out; }
-            #header.scrolled { background-color: rgba(255, 255, 255, 0.8); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07); }
-            .cta-glow:hover { box-shadow: 0 0 20px 0 rgba(56, 189, 248, 0.6); }
-            .info-card { transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; }
-            .info-card:hover { transform: translateY(-8px); box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1); }
-            .hero-title span { display: inline-block; opacity: 0; transform: translateY(25px); animation: fadeIn-up 0.8s cubic-bezier(0.6, 0.2, 0.4, 1) forwards; }
-            @keyframes fadeIn-up { to { opacity: 1; transform: translateY(0); } }
+        /* Card con borde gradiente y efecto glass */
+        .info-card {
+            background: rgba(26, 32, 44, 0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            position: relative; border: 1px solid transparent; background-clip: padding-box;
+            transition: transform 0.3s ease-in-out;
+        }
+        .info-card:hover { transform: translateY(-10px) !important; }
+        .info-card::before {
+            content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: -1;
+            margin: -1px; border-radius: inherit;
+            background: linear-gradient(145deg, rgba(56, 189, 248, 0.3), rgba(56, 189, 248, 0.05), rgba(56, 189, 248, 0.3));
+        }
+        
+        /* Fondo de Aurora */
+        .aurora-background {
+            background-image: radial-gradient(ellipse 200% 100% at 50% 0%, rgba(56, 189, 248, 0.2), transparent),
+                              radial-gradient(ellipse 200% 100% at 50% 100%, rgba(56, 189, 248, 0.15), transparent);
+            background-size: 125% 125%;
+        }
 
-            /* Loader */
-            #loader-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #1f2937; display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s ease-out; overflow: hidden; }
-            #rain-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-            #loader-wrapper.hidden { opacity: 0; pointer-events: none; }
-            .loader-content { text-align: center; z-index: 1; }
-            .loader-text { color: #F8F9FA; font-size: 1.5rem; margin-bottom: 1rem; }
-            .loader-bar-container { width: 250px; height: 6px; background-color: #4b5563; border-radius: 3px; overflow: hidden; }
-            .loader-bar { width: 0; height: 100%; background-color: #38bdf8; border-radius: 3px; animation: loading-animation 1.5s ease-out forwards; }
-            @keyframes loading-animation { from { width: 0%; } to { width: 100%; } }
+        /* Loader nuevo */
+        #loader-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #0B0F19; display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s ease-out, visibility 0.5s; }
+        #loader-wrapper.hidden { opacity: 0; visibility: hidden; }
+        .loader-content { text-align: center; position: relative; }
+        .loader-title { font-family: 'Poppins', sans-serif; font-size: 2.5rem; color: #F7FAFC; font-weight: 700; animation: text-fade-in 1.5s ease-out; }
+        .loader-subtitle { font-family: 'Inter', sans-serif; font-size: 1rem; color: #A0AEC0; letter-spacing: 0.1em; text-transform: uppercase; animation: text-fade-in 1.5s ease-out 0.2s; animation-fill-mode: backwards; }
+        .loader-ripple {
+            position: absolute; top: 50%; left: 50%;
+            border: 2px solid rgba(56, 189, 248, 0.7);
+            border-radius: 50%;
+            animation: ripple-effect 1.5s ease-out forwards;
+        }
+        @keyframes ripple-effect {
+            from { width: 0; height: 0; opacity: 1; transform: translate(-50%, -50%); }
+            to { width: 400px; height: 400px; opacity: 0; transform: translate(-50%, -50%); }
+        }
+        @keyframes text-fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-            /* Control de Volumen */
-            #volume-control { position: fixed; bottom: 1rem; right: 1rem; display: flex; align-items: center; gap: 0.5rem; background-color: rgba(31, 41, 55, 0.8); padding: 0.5rem; border-radius: 9999px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); backdrop-filter: blur(5px); z-index: 1000; }
-            #volume-slider { width: 0px; opacity: 0; transition: width 0.3s ease, opacity 0.3s ease; -webkit-appearance: none; background: transparent; }
-            #volume-control:hover #volume-slider { width: 80px; opacity: 1; }
-            #volume-slider::-webkit-slider-runnable-track { height: 4px; background: #6B7280; border-radius: 2px; }
-            #volume-slider::-webkit-slider-thumb { -webkit-appearance: none; margin-top: -4px; height: 12px; width: 12px; background: #38bdf8; border-radius: 50%; cursor: pointer; }
-            #volume-button { cursor: pointer; color: #F8F9FA; }
+        /* Control de Volumen */
+        #volume-control { position: fixed; bottom: 1.5rem; right: 1.5rem; display: flex; align-items: center; gap: 0.5rem; background-color: rgba(26, 32, 44, 0.7); padding: 0.75rem; border-radius: 9999px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 1000; }
+        #volume-slider { width: 0px; opacity: 0; transition: width 0.4s ease, opacity 0.4s ease; -webkit-appearance: none; background: transparent; }
+        #volume-control:hover #volume-slider { width: 100px; opacity: 1; margin: 0 0.5rem; }
+        #volume-slider::-webkit-slider-runnable-track { height: 4px; background: #A0AEC0; border-radius: 2px; }
+        #volume-slider::-webkit-slider-thumb { -webkit-appearance: none; margin-top: -6px; height: 16px; width: 16px; background: #38bdf8; border-radius: 50%; cursor: pointer; }
+        #volume-button { cursor: pointer; color: #F7FAFC; }
+        
+        /* Estilos Minijuego */
+        .letter-option.correct { background-color: #22c55e !important; color: white; transform: scale(1.1); box-shadow: 0 0 15px #22c55e; }
+        .letter-option.incorrect { animation: shake 0.5s ease-in-out; background-color: #ef4444 !important; color: white; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); } 20%, 40%, 60%, 80% { transform: translateX(8px); } }
 
-            /* --- ESTILOS DEL MINIJUEGO --- */
-            .word-to-find { transition: all 0.4s ease; }
-            .word-to-find.found { text-decoration: line-through; color: #9ca3af; opacity: 0.7; transform: scale(0.95); }
-            #current-word-display .letter-placeholder { display: flex; justify-content: center; align-items: center; width: 2.5rem; height: 3.5rem; border-bottom: 3px solid #d1d5db; transition: all 0.3s ease; }
-            .letter-option { transition: all 0.2s ease-in-out; }
-            .letter-option.correct { background-color: #22c55e !important; color: white; transform: scale(1.05); cursor: not-allowed; }
-            .letter-option.incorrect { animation: shake 0.5s ease-in-out; background-color: #ef4444 !important; color: white; }
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
-                20%, 40%, 60%, 80% { transform: translateX(8px); }
-            }
-            #game-feedback.visible { opacity: 1; pointer-events: auto; }
-        </style>
-    </head>
-    <body class="bg-background text-primary antialiased">
+        /* Estilos para sección de info directa */
+        .info-section b { font-weight: 600; color: #E2E8F0; } /* gray-200 */
+        .info-section h4 { font-weight: 700; color: #F7FAFC; } /* primary */
+    </style>
+</head>
+<body class="bg-background text-primary antialiased">
 
-        <div id="loader-wrapper">
-            <canvas id="rain-canvas"></canvas>
-            <div class="loader-content">
-                <p class="loader-text font-display">Sanvy corporation</p>
-                <div class="loader-bar-container">
-                    <div class="loader-bar"></div>
-                </div>
-            </div>
-            <audio id="lofi-music">
-                <source src="music.mp3" type="audio/mpeg">
-            </audio>
+    <div id="loader-wrapper">
+        <div class="loader-content">
+            <h2 class="loader-title">Viana's Inc.</h2>
+            <p class="loader-subtitle">Websites & Apps.</p>
+            <div class="loader-ripple"></div>
         </div>
+        <audio id="lofi-music" loop>
+            <source src="https://github.com/sanvy-stack/hablemos-de-bulimia/raw/main/music.mp3" type="audio/mpeg">
+        </audio>
+    </div>
 
-        <div id="volume-control">
-            <button id="volume-button"></button>
-            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.5">
+    <div id="volume-control">
+        <button id="volume-button"></button>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.3">
+    </div>
+    
+    <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-display font-bold text-2xl tracking-tighter">Hablemos.</a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#info-completa" class="text-secondary hover:text-accent transition-colors duration-300">Información</a>
+                <a href="#word-game-container" class="text-secondary hover:text-accent transition-colors duration-300">Juego</a>
+                <a href="#ayuda" class="bg-accent text-white px-5 py-2 rounded-lg font-medium hover:bg-accent-hover transition-all duration-300 shadow-lg shadow-accent/20 hover:shadow-xl hover:shadow-accent/40 transform hover:-translate-y-1">Buscar Ayuda</a>
+            </nav>
+            <button id="menu-btn" class="md:hidden z-50">
+                <i data-lucide="menu" class="text-primary"></i>
+            </button>
         </div>
+        <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-screen bg-surface/95 backdrop-blur-lg">
+            <nav class="flex flex-col items-center justify-center h-full space-y-8">
+                <a href="#info-completa" class="text-secondary hover:text-accent text-3xl font-display">Información</a>
+                <a href="#word-game-container" class="text-secondary hover:text-accent text-3xl font-display">Juego</a>
+                <a href="#ayuda" class="bg-accent text-white px-8 py-4 rounded-lg font-medium text-xl hover:bg-accent-hover transition-all duration-300 transform hover:-translate-y-1">Buscar Ayuda</a>
+            </nav>
+        </div>
+    </header>
 
-        <header id="header" class="fixed top-0 left-0 w-full bg-surface/0 backdrop-blur-sm z-50">
-            <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-                <a href="#" class="font-display font-bold text-2xl text-primary tracking-tighter">Hablemos.</a>
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#info-completa" class="text-secondary hover:text-accent transition-colors duration-300">Información</a>
-                    <a href="#ayuda" class="bg-accent text-white px-5 py-2 rounded-lg font-medium hover:bg-accent-hover transition-all duration-300 shadow-sm hover:shadow-md transform hover:translate-y-1">Buscar Ayuda</a>
-                </nav>
-                <button id="menu-btn" class="md:hidden z-50">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                </button>
+    <main>
+        <section id="hero" class="min-h-screen flex flex-col items-center justify-center text-center p-4 relative overflow-hidden">
+            <div class="absolute inset-0 bg-background opacity-50 z-0"></div>
+            <div class="container mx-auto px-6 z-10">
+                <h1 class="font-display text-4xl md:text-6xl lg:text-8xl font-extrabold !leading-tight tracking-tighter bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-400" data-aos="fade-up">
+                    Hablemos sobre la Bulimia.
+                </h1>
+                <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-secondary" data-aos="fade-up" data-aos-delay="200">
+                    Es un tema serio, pero informarse y hablar es el primer paso para ayudar y entender. No estás solo/a.
+                </p>
+                <a href="#info-completa" class="mt-10 inline-block bg-accent text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-accent-hover transition-all duration-300 shadow-lg shadow-accent/30 hover:shadow-xl hover:shadow-accent/50 transform hover:-translate-y-1.5 cta-glow" data-aos="fade-up" data-aos-delay="400">
+                    Aprender más
+                </a>
             </div>
-            <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-screen bg-surface">
-                <nav class="flex flex-col items-center justify-center h-full space-y-8">
-                    <a href="#info-completa" class="text-secondary hover:text-accent text-2xl font-display">Información</a>
-                    <a href="#ayuda" class="bg-accent text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-accent-hover transition-all duration-300 transform hover:translate-y-1">Buscar Ayuda</a>
-                </nav>
-            </div>
-        </header>
+        </section>
 
-        <main>
-            <section class="min-h-screen pt-24 pb-12 md:pt-32 flex flex-col items-center justify-center bg-background">
-                <div class="container mx-auto px-6 text-center">
-                    <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold !leading-tight tracking-tighter hero-title">
-                        Hablemos sobre la Bulimia.
-                    </h1>
-                    <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-secondary reveal" style="transition-delay: 1s;">
-                        Es un tema serio, pero informarse y hablar es el primer paso para ayudar y entender. No estás solo/a.
+        <section id="info-completa" class="py-20 md:py-32 aurora-background animate-aurora">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto" data-aos="fade-up">
+                    <span class="font-display text-accent font-semibold">Información Detallada</span>
+                    <h2 class="font-display text-3xl md:text-5xl font-bold mt-2 mb-6 tracking-tight">Comprendiendo la Bulimia Nerviosa</h2>
+                    <p class="text-secondary text-lg">
+                        Aquí encontrarás información clave para entender qué es, sus causas, síntomas y cómo se puede tratar.
                     </p>
-                    <a href="#info-completa" class="mt-10 inline-block bg-accent text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-accent-hover transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 reveal cta-glow" style="transition-delay: 1.2s;">
-                        Aprender más
-                    </a>
                 </div>
 
-                <div id="word-game-container" class="mt-16 md:mt-20 w-full max-w-4xl mx-auto text-center reveal px-4" style="transition-delay: 1.4s;">
-                    <div class="mb-4">
-                        <h3 class="font-display text-xl font-bold text-primary">Palabras a encontrar:</h3>
-                        <div id="words-to-find" class="flex flex-wrap justify-center gap-x-4 gap-y-2 mt-2 text-secondary text-lg">
-                            </div>
-                    </div>
-
-                    <div class="bg-surface p-6 sm:p-8 rounded-lg shadow-lg relative min-h-[300px]">
-                        <p class="text-secondary mb-2">Selecciona las letras en el orden correcto para descubrir la palabra secreta.</p>
-                        
-                        <div class="flex justify-between items-center mb-4 text-sm font-medium text-secondary">
-                            <span id="game-word-counter">Palabra 1 / 4</span>
-                            <span id="game-attempts-counter">Intentos restantes: 3</span>
-                        </div>
-
-                        <div id="current-word-display" class="flex justify-center gap-2 text-3xl sm:text-4xl font-bold font-display tracking-widest text-primary mb-6 h-12">
-                            </div>
-
-                        <div id="letter-options" class="flex flex-wrap justify-center gap-2 sm:gap-3">
-                            </div>
-
-                        <div id="game-feedback" class="absolute inset-0 bg-surface/90 backdrop-blur-sm flex flex-col justify-center items-center rounded-lg opacity-0 pointer-events-none transition-opacity duration-300">
-                            <p id="feedback-message" class="text-3xl font-bold font-display text-center"></p>
-                            <button id="feedback-button" class="mt-4 bg-accent text-white px-6 py-2 rounded-lg font-medium hover:bg-accent-hover transition-colors">Continuar</button>
+                <div class="max-w-4xl mx-auto mt-16 space-y-8 info-section">
+                    
+                    <div class="info-card rounded-2xl p-8" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="font-display font-bold text-2xl text-primary mb-4">1. ¿Qué es la bulimia nerviosa?</h3>
+                        <div class="text-secondary text-lg leading-relaxed space-y-4">
+                            <p>La bulimia nerviosa es un trastorno de la conducta alimentaria grave y potencialmente mortal. A diferencia de la anorexia, las personas con bulimia suelen tener un peso normal o sobrepeso. La característica principal es un ciclo de atracones seguidos de conductas compensatorias.</p>
+                            <ul class="list-disc list-inside space-y-2 pl-4">
+                                <li><b>Atracones:</b> Ingerir mucha comida en poco tiempo, con sensación de pérdida de control.</li>
+                                <li><b>Conductas compensatorias:</b> Acciones para "compensar" el atracón, como el vómito autoinducido, uso de laxantes, ayuno o ejercicio excesivo.</li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            <section id="info-completa" class="py-20 md:py-32 bg-surface">
-                <div class="container mx-auto px-6">
-                    <div class="text-center max-w-3xl mx-auto reveal">
-                        <span class="font-display text-accent font-semibold">Información Detallada</span>
-                        <h2 class="font-display text-3xl md:text-4xl font-bold mt-2 mb-6 tracking-tight">Comprendiendo la Bulimia Nerviosa</h2>
-                        <p class="text-secondary text-lg">
-                            Aquí encontrarás información clave para entender qué es, sus causas, síntomas y cómo se puede tratar.
-                        </p>
-                    </div>
-                    <div class="mt-16 space-y-16 max-w-5xl mx-auto">
-                        <div id="definicion-detallada" class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center reveal">
-                            <div class="order-2 md:order-1">
-                                <h3 class="font-display font-bold text-2xl mb-4 text-primary flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-                                    <span class="ml-3">1. ¿Qué es la bulimia nerviosa?</span>
-                                </h3>
-                                <p class="text-secondary text-lg leading-relaxed">
-                                    La bulimia nerviosa es un trastorno de la conducta alimentaria grave y potencialmente mortal. A diferencia de la anorexia, las personas con bulimia suelen tener un peso normal o sobrepeso. La característica principal es un ciclo de atracones seguidos de conductas compensatorias.
-                                </p>
-                                <ul class="mt-4 space-y-2 text-secondary text-lg list-disc list-inside">
-                                    <li><b>Atracones:</b> Ingerir mucha comida en poco tiempo, con sensación de pérdida de control.</li>
-                                    <li><b>Conductas compensatorias:</b> Acciones para "compensar" el atracón, como el vómito autoinducido, uso de laxantes, ayuno o ejercicio excesivo.</li>
+                    
+                    <div class="info-card rounded-2xl p-8" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="font-display font-bold text-2xl text-primary mb-4">2. Causas y factores de riesgo</h3>
+                        <div class="text-secondary text-lg leading-relaxed space-y-6">
+                            <p>La bulimia nerviosa no surge de una única causa, sino de una compleja interacción de factores psicológicos, biológicos y socioculturales.</p>
+                            <div>
+                                <h4 class="text-xl mb-3">Factores Psicológicos</h4>
+                                <ul class="list-disc list-inside space-y-3 pl-4">
+                                    <li><b>Baja autoestima y autocrítica intensa:</b> una sensación constante de no ser suficiente.</li>
+                                    <li><b>Imagen corporal negativa:</b> distorsión de la percepción del propio cuerpo e insatisfacción.</li>
+                                    <li><b>Perfeccionismo:</b> necesidad de cumplir estándares imposibles.</li>
+                                    <li><b>Manejo inadecuado de emociones:</b> dificultad para afrontar el estrés, la ansiedad o la depresión.</li>
                                 </ul>
                             </div>
-                            <div class="order-1 md:order-2">
-                                <img src="https://i.ibb.co/5gXBgm75/gogeable.jpg" alt="Persona recibiendo apoyo y consuelo" class="rounded-lg shadow-xl w-full h-auto object-cover aspect-square">
+                            <div>
+                                <h4 class="text-xl mb-3">Factores Biológicos</h4>
+                                <ul class="list-disc list-inside space-y-3 pl-4">
+                                     <li><b>Predisposición genética:</b> antecedentes familiares de TCA, depresión o adicciones.</li>
+                                     <li><b>Neurotransmisores alterados:</b> desequilibrios en serotonina y dopamina.</li>
+                                     <li><b>Factores hormonales:</b> cambios durante la adolescencia.</li>
+                                </ul>
+                            </div>
+                             <div>
+                                <h4 class="text-xl mb-3">Factores Socioculturales</h4>
+                                <ul class="list-disc list-inside space-y-3 pl-4">
+                                    <li><b>Ideal de delgadez:</b> presión por estándares de belleza poco realistas.</li>
+                                    <li><b>Cultura de la dieta:</b> normalización de prácticas alimentarias extremas.</li>
+                                    <li><b>Entorno y bullying:</b> comentarios negativos sobre el peso o burlas.</li>
+                                    <li><b>Impacto de las redes sociales:</b> exposición a imágenes editadas y comparaciones.</li>
+                                </ul>
                             </div>
                         </div>
-                        <div id="causas-factores" class="bg-background p-8 md:p-12 rounded-lg shadow-md reveal info-card">
-                            <h3 class="font-display font-bold text-2xl mb-6 text-primary flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M12.5 2.5l-3 3-3-3-3 3-3-3"></path><path d="M12.5 8.5l-3 3-3-3-3 3-3-3"></path><path d="M12.5 14.5l-3 3-3-3-3 3-3-3"></path><path d="M12.5 20.5l-3 3-3-3-3 3-3-3"></path></svg>
-                                <span class="ml-3">2. Causas y factores de riesgo</span>
-                            </h3>
-                            <p class="text-secondary text-lg leading-relaxed mb-8">
-                                La bulimia nerviosa no surge de una única causa, sino que se entiende como el resultado de una compleja interacción de factores psicológicos, biológicos y socioculturales, que se potencian entre sí y pueden aumentar la vulnerabilidad de una persona a desarrollar este trastorno.
-                            </p>
+                    </div>
                     
-                            <div class="space-y-8">
+                    <div class="info-card rounded-2xl p-8" data-aos="fade-up" data-aos-delay="300">
+                        <h3 class="font-display font-bold text-2xl text-primary mb-4">3. Síntomas y señales de alerta</h3>
+                         <div class="text-secondary text-lg leading-relaxed space-y-6">
+                            <p>La bulimia se manifiesta a través de un ciclo de atracones de comida seguidos de conductas compensatorias (como el vómito o el uso de laxantes).</p>
+                            <img src="https://images.unsplash.com/photo-1594125022839-a9992c453c02?q=80&w=1000&auto=format&fit=crop" alt="Persona recibiendo apoyo y consuelo" class="rounded-lg shadow-xl w-full h-auto object-cover aspect-video my-4">
+                            <div class="grid md:grid-cols-3 gap-6 text-left">
                                 <div>
-                                    <h4 class="font-bold text-primary text-xl mb-3">Factores Psicológicos</h4>
-                                    <p class="text-secondary text-lg leading-relaxed mb-4">
-                                        Las personas con bulimia suelen presentar una combinación de rasgos y experiencias emocionales que contribuyen a su aparición:
-                                    </p>
-                                    <ul class="space-y-3 text-secondary text-lg list-disc list-inside">
-                                        <li><b>Baja autoestima y autocrítica intensa:</b> una sensación constante de no ser suficiente o de no tener valor propio.</li>
-                                        <li><b>Imagen corporal negativa:</b> distorsión de la percepción del propio cuerpo, con insatisfacción persistente hacia el peso o la forma.</li>
-                                        <li><b>Perfeccionismo:</b> necesidad de cumplir estándares imposibles, lo que lleva a frustración y a conductas compensatorias extremas.</li>
-                                        <li><b>Manejo inadecuado de emociones:</b> dificultad para afrontar el estrés, la ansiedad, la soledad o la depresión. Los atracones pueden funcionar como una forma de escape momentáneo, seguidos de la culpa que desencadena conductas purgativas.</li>
-                                    </ul>
+                                    <h4 class="mb-2">Comportamiento</h4>
+                                    <p>Obsesión con el peso, episodios de atracones, uso de conductas compensatorias y ocultamiento de este comportamiento.</p>
                                 </div>
-                    
                                 <div>
-                                    <h4 class="font-bold text-primary text-xl mb-3">Factores Biológicos</h4>
-                                    <p class="text-secondary text-lg leading-relaxed mb-4">
-                                        La investigación ha encontrado que existen elementos biológicos que aumentan el riesgo:
-                                    </p>
-                                    <ul class="space-y-3 text-secondary text-lg list-disc list-inside">
-                                        <li><b>Predisposición genética:</b> tener familiares con antecedentes de trastornos de la conducta alimentaria, depresión o adicciones eleva la probabilidad.</li>
-                                        <li><b>Neurotransmisores alterados:</b> desequilibrios en sustancias como la serotonina y la dopamina, que regulan el estado de ánimo, la sensación de recompensa y el apetito.</li>
-                                        <li><b>Factores hormonales:</b> los cambios durante la adolescencia, especialmente en mujeres, pueden actuar como desencadenantes debido a la mayor sensibilidad emocional y corporal en esa etapa.</li>
-                                    </ul>
+                                    <h4 class="mb-2">Señales físicas</h4>
+                                    <p>Hinchazón facial, daño dental por erosión del esmalte y callosidades en los nudillos (signo de Russell).</p>
                                 </div>
-                    
                                 <div>
-                                    <h4 class="font-bold text-primary text-xl mb-3">Factores Socioculturales</h4>
-                                    <p class="text-secondary text-lg leading-relaxed mb-4">
-                                        El entorno social y cultural ejerce una gran influencia en la aparición y el mantenimiento de la bulimia:
-                                    </p>
-                                    <ul class="space-y-3 text-secondary text-lg list-disc list-inside">
-                                        <li><b>Ideal de delgadez:</b> la presión por alcanzar estándares de belleza poco realistas promovidos por medios de comunicación, publicidad y redes sociales.</li>
-                                        <li><b>Normalización de dietas extremas:</b> la cultura de la “dieta rápida” y el mensaje de que “el valor personal depende del cuerpo” refuerzan la insatisfacción física.</li>
-                                        <li><b>Entorno familiar y social:</b> comentarios negativos sobre el peso, experiencias de burlas o bullying, y contextos donde la apariencia es muy valorada pueden favorecer la aparición del trastorno.</li>
-                                        <li><b>Impacto de las redes sociales:</b> la exposición constante a imágenes editadas o filtradas genera comparaciones dañinas y presión constante por cumplir con un “cuerpo perfecto”.</li>
-                                    </ul>
+                                    <h4 class="mb-2">Problemas de salud</h4>
+                                    <p>Arritmias cardíacas, daño en el esófago y fallo renal debido a la deshidratación y desequilibrio de electrolitos.</p>
                                 </div>
                             </div>
-                    
-                            <p class="text-secondary text-lg leading-relaxed mt-8">
-                                En resumen, la bulimia es un trastorno complejo en el que influyen predisposiciones internas y factores externos. No basta con señalar una única causa: es la combinación de vulnerabilidad psicológica, componentes biológicos y presiones socioculturales lo que crea el terreno para que aparezca y se mantenga.
-                            </p>
-                        </div>
-                        <div id="sintomas-alertas" class="bg-surface p-8 md:p-12 rounded-lg shadow-md reveal info-card">
-                            <h3 class="font-display font-bold text-2xl mb-6 text-primary flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                                <span class="ml-3">3. Síntomas y señales de alerta</span>
-                            </h3>
-                            <p class="text-secondary text-lg leading-relaxed mb-8">
-                                La bulimia se manifiesta a través de un ciclo de atracones de comida seguidos de conductas compensatorias (como el vómito o el uso de laxantes).
-                            </p>
-                            
-                            <div class="my-12 reveal">
-                                <img src="tca.png" alt="Infografía sobre señales de alerta de los Trastornos de la Conducta Alimentaria" class="w-full max-w-2xl mx-auto rounded-lg shadow-lg">
-                            </div>
-                            <div class="grid md:grid-cols-3 gap-8 text-secondary text-lg">
-                                <div>
-                                    <h4 class="font-bold text-primary mb-2">Comportamiento</h4>
-                                    <p>La persona que padece bulimia se caracteriza por una obsesión con el peso y la figura. Experimenta episodios de atracones y utiliza conductas como el vómito, laxantes o ejercicio excesivo para compensar. Este comportamiento suele ser oculto.</p>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-primary mb-2">Señales físicas</h4>
-                                    <p>El vómito autoinducido causa hinchazón facial por la inflamación de las glándulas salivales y daño dental por la erosión del esmalte. También es común encontrar callosidades en los nudillos (signo de Russell) por el uso repetido de las manos para purgarse.</p>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-primary mb-2">Problemas de salud</h4>
-                                    <p>El ciclo de atracones y purgas es extremadamente dañino y puede llevar a problemas graves como arritmias cardíacas (por el desequilibrio de electrolitos), daño en el esófago y fallo renal debido a la deshidratación crónica.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="tratamiento-recuperacion" class="bg-background p-8 md:p-12 rounded-lg shadow-md reveal info-card">
-                            <h3 class="font-display font-bold text-2xl mb-6 text-primary flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                                <span class="ml-3">4. Tratamiento y recuperación</span>
-                            </h3>
-                            <p class="text-secondary text-lg leading-relaxed mb-6">El tratamiento es integral y aborda las causas de fondo, no solo la comida. La recuperación es posible.</p>
-                            <ul class="space-y-4 text-secondary text-lg">
+                         </div>
+                    </div>
+
+                    <div class="info-card rounded-2xl p-8" data-aos="fade-up" data-aos-delay="400">
+                        <h3 class="font-display font-bold text-2xl text-primary mb-4">4. Tratamiento y recuperación</h3>
+                        <div class="text-secondary text-lg leading-relaxed space-y-4">
+                            <p>El tratamiento es integral y aborda las causas de fondo, no solo la comida. La recuperación es posible.</p>
+                            <ul class="list-disc list-inside space-y-2 pl-4">
                                 <li><b>Terapia psicológica:</b> La Terapia Cognitivo-Conductual (TCC) es muy efectiva para cambiar pensamientos y comportamientos dañinos.</li>
-                                <li><b>Asesoramiento nutricional:</b> Un profesional ayuda a establecer un patrón de alimentación saludable y a desmitificar creencias sobre la comida.</li>
+                                <li><b>Asesoramiento nutricional:</b> Un profesional ayuda a establecer un patrón de alimentación saludable.</li>
                                 <li><b>Medicación:</b> A veces, los antidepresivos pueden ayudar a reducir los atracones y tratar la ansiedad o depresión.</li>
                             </ul>
                         </div>
                     </div>
-                </div>
-            </section>
 
-            <section class="py-20 md:py-32">
-                <div class="container mx-auto px-6 reveal">
-                    <div class="max-w-4xl mx-auto"><blockquote class="text-center"><p class="text-xl md:text-2xl font-medium text-primary">“Hablar de lo que me pasaba fue lo más difícil, pero también lo que me salvó. Pedir ayuda no es de débiles, es de valientes. La recuperación es un camino, pero es posible.”</p><footer class="mt-8"><p class="font-bold text-lg">- Anónimo</p></footer></blockquote></div>
                 </div>
-            </section>
-        </main>
+            </div>
+        </section>
 
-        <footer id="ayuda" class="bg-background py-16">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="font-display text-3xl font-bold reveal">Pedir ayuda es el paso más importante.</h2>
-                <p class="text-secondary mt-4 max-w-2xl mx-auto reveal" style="transition-delay: 150ms;">Si vos o alguien que conocés necesita ayuda, no duden en buscarla. Hay personas dispuestas a escuchar y acompañar.</p>
-                <div class="mt-8 reveal" style="transition-delay: 300ms;">
-                    <p class="font-bold text-lg">Recursos en Argentina:</p>
-                    <div class="mt-4 space-y-2">
-                        <p class="text-secondary"><b>ALUBA:</b> 011-4306-0033 / 0800-222-5822</p>
-                        <p class="text-secondary"><b>La Casita:</b> 011-4786-2352 / 011-15-4412-2575</p>
-                        <p class="text-secondary"><b>Salud Mental Responde (CABA):</b> 0800-333-1665</p>
+        <!-- Minijuego -->
+        <section class="py-20 md:py-32 bg-background">
+             <div id="word-game-container" class="w-full max-w-4xl mx-auto text-center px-4" data-aos="fade-up">
+                <div class="mb-8">
+                    <h3 class="font-display text-2xl md:text-3xl font-bold text-primary">Juego: Descubre la Palabra</h3>
+                    <p class="text-secondary mt-2">Selecciona las letras en orden para revelar 4 palabras de apoyo.</p>
+                </div>
+                <div class="bg-surface p-6 sm:p-8 rounded-2xl shadow-2xl relative min-h-[300px] info-card">
+                    <div class="flex justify-between items-center mb-4 text-sm font-medium text-secondary">
+                        <span id="game-word-counter">Palabra 1 / 4</span>
+                        <span id="game-attempts-counter">Intentos restantes: 3</span>
+                    </div>
+                    <div id="current-word-display" class="flex justify-center gap-2 text-3xl sm:text-4xl font-bold font-display tracking-widest text-primary mb-6 h-14"></div>
+                    <div id="letter-options" class="flex flex-wrap justify-center gap-2 sm:gap-3"></div>
+                    <div id="game-feedback" class="absolute inset-0 bg-surface/90 backdrop-blur-sm flex flex-col justify-center items-center rounded-2xl opacity-0 pointer-events-none transition-opacity duration-300">
+                        <p id="feedback-message" class="text-3xl font-bold font-display text-center"></p>
+                        <button id="feedback-button" class="mt-6 bg-accent text-white px-6 py-2 rounded-lg font-medium hover:bg-accent-hover transition-colors">Continuar</button>
                     </div>
                 </div>
-                <p class="text-secondary text-sm mt-12">© <span id="year"></span> Exposición de Ciudadanía. Esta página es un recurso informativo.</p>
             </div>
-        </footer>
+        </section>
+        
+        <!-- Cita -->
+        <section class="py-20 md:py-32">
+            <div class="container mx-auto px-6" data-aos="zoom-in">
+                <div class="max-w-4xl mx-auto">
+                    <blockquote class="text-center">
+                        <p class="text-xl md:text-3xl font-medium text-primary leading-relaxed">
+                            “Hablar de lo que me pasaba fue lo más difícil, pero también lo que me salvó. Pedir ayuda no es de débiles, es de valientes. La recuperación es un camino, pero es posible.”
+                        </p>
+                        <footer class="mt-8">
+                            <p class="font-bold text-lg text-secondary">- Anónimo</p>
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+    </main>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                // --- ELEMENTOS ---
-                const loader = document.getElementById('loader-wrapper');
-                const lofiMusic = document.getElementById('lofi-music');
-                const volumeButton = document.getElementById('volume-button');
-                const volumeSlider = document.getElementById('volume-slider');
-                let userHasInteracted = false;
-                let fadeInterval;
+    <footer id="ayuda" class="bg-surface py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="font-display text-3xl md:text-4xl font-bold" data-aos="fade-up">Pedir ayuda es el paso más importante.</h2>
+            <p class="text-secondary mt-4 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="150">
+                Si vos o alguien que conocés necesita ayuda, no duden en buscarla. Hay personas dispuestas a escuchar y acompañar.
+            </p>
+            <div class="mt-10" data-aos="fade-up" data-aos-delay="300">
+                <p class="font-bold text-lg text-accent">Recursos en Argentina:</p>
+                <div class="mt-4 space-y-2 text-secondary">
+                    <p><b>ALUBA:</b> 011-4306-0033 / 0800-222-5822</p>
+                    <p><b>La Casita:</b> 011-4786-2352 / 011-15-4412-2575</p>
+                    <p><b>Salud Mental Responde (CABA):</b> 0800-333-1665</p>
+                </div>
+            </div>
+            <p class="text-secondary text-sm mt-16">© <span id="year"></span> Exposición de Ciudadanía. Esta página es un recurso informativo.</p>
+        </div>
+    </footer>
 
-                // --- ICONOS DE VOLUMEN (SVG) ---
-                const icons = {
-                    muted: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>`,
-                    low: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`,
-                    high: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`
-                };
-                
-                // --- LÓGICA DE MÚSICA ---
-                const setVolumeIcon = (volume) => {
-                    if (lofiMusic.muted || volume === 0) volumeButton.innerHTML = icons.muted;
-                    else if (volume < 0.5) volumeButton.innerHTML = icons.low;
-                    else volumeButton.innerHTML = icons.high;
-                };
+    <!-- Librerías JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-                const fadeAudio = (targetVolume, duration = 1000) => {
-                    clearInterval(fadeInterval);
-                    const startVolume = lofiMusic.volume;
-                    const step = (targetVolume - startVolume) / (duration / 50);
-                    fadeInterval = setInterval(() => {
-                        const newVolume = lofiMusic.volume + step;
-                        if ((step > 0 && newVolume >= targetVolume) || (step < 0 && newVolume <= targetVolume)) {
-                            lofiMusic.volume = targetVolume;
-                            clearInterval(fadeInterval);
-                            if (targetVolume === 0) lofiMusic.pause();
-                        } else {
-                            lofiMusic.volume = newVolume;
-                        }
-                        setVolumeIcon(lofiMusic.volume);
-                    }, 50);
-                };
-
-                const playMusic = () => {
-                    lofiMusic.currentTime = 0;
-                    lofiMusic.volume = 0;
-                    setVolumeIcon(0);
-                    const playPromise = lofiMusic.play();
-                    if (playPromise !== undefined) {
-                        playPromise.then(() => {
-                            fadeAudio(parseFloat(volumeSlider.value));
-                        }).catch(error => {
-                            console.log("La reproducción automática fue bloqueada. Se necesita interacción del usuario.");
-                            document.body.addEventListener('click', () => {
-                            if(lofiMusic.paused && !userHasInteracted) {
-                                userHasInteracted = true;
-                                playMusic();
-                            }
-                            }, { once: true });
-                        });
-                    }
-                };
-                
-                lofiMusic.addEventListener('ended', () => {
-                    setTimeout(() => playMusic(), 1000); // 1s delay before looping
-                });
-                
-                volumeButton.addEventListener('click', () => {
-                    lofiMusic.muted = !lofiMusic.muted;
-                    setVolumeIcon(lofiMusic.muted ? 0 : lofiMusic.volume);
-                });
-                
-                volumeSlider.addEventListener('input', (e) => {
-                    const newVolume = parseFloat(e.target.value);
-                    lofiMusic.volume = newVolume;
-                    if(lofiMusic.muted && newVolume > 0) lofiMusic.muted = false;
-                    setVolumeIcon(newVolume);
-                });
-                
-                // --- INICIO DE TODO ---
-                setVolumeIcon(parseFloat(volumeSlider.value)); // Set initial icon
-                setTimeout(() => {
-                    loader.classList.add('hidden');
-                    setTimeout(() => playMusic(), 500); // 0.5s delay after loader
-                }, 1500);
-
-                // --- Lógica del menú móvil ---
-                const menuBtn = document.getElementById('menu-btn');
-                const mobileMenu = document.getElementById('mobile-menu');
-                const navLinks = document.querySelectorAll('header a[href^="#"]');
-                const toggleMenu = () => {
-                    const isMenuOpen = !mobileMenu.classList.contains('hidden');
-                    mobileMenu.classList.toggle('hidden');
-                    document.body.style.overflow = isMenuOpen ? 'auto' : 'hidden';
-                    menuBtn.innerHTML = isMenuOpen 
-                        ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`
-                        : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
-                };
-                menuBtn.addEventListener('click', toggleMenu);
-                navLinks.forEach(link => {
-                    link.addEventListener('click', () => {
-                        if (!mobileMenu.classList.contains('hidden')) toggleMenu();
-                    });
-                });
-
-                // --- Lógica para animaciones al hacer scroll ---
-                const revealElements = document.querySelectorAll('.reveal');
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                        }
-                    });
-                }, { threshold: 0.1 });
-                revealElements.forEach(element => observer.observe(element));
-                
-                // --- Lógica para animar el título del Hero ---
-                const heroTitle = document.querySelector('.hero-title');
-                if(heroTitle && heroTitle.textContent) {
-                    const words = heroTitle.textContent.trim().split(' ');
-                    heroTitle.innerHTML = '';
-                    words.forEach((word, index) => {
-                        const wordSpan = document.createElement('span');
-                        wordSpan.textContent = word;
-                        wordSpan.style.animationDelay = `${index * 0.1 + 1.5}s`;
-                        heroTitle.appendChild(wordSpan);
-                        if (index < words.length - 1) heroTitle.append(' ');
-                    });
-                }
-                
-                // --- Lógica para la sombra del header ---
-                const header = document.getElementById('header');
-                window.addEventListener('scroll', () => {
-                    header.classList.toggle('scrolled', window.scrollY > 10);
-                });
-
-                // --- Lógica para la animación de lluvia ---
-                const canvas = document.getElementById('rain-canvas');
-                const ctx = canvas.getContext('2d');
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                let drops = [];
-                for (let i = 0; i < 100; i++) {
-                    drops.push({
-                        x: Math.random() * canvas.width,
-                        y: Math.random() * canvas.height,
-                        length: Math.random() * 20 + 10,
-                        speed: Math.random() * 5 + 2,
-                    });
-                }
-                function drawRain() {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    ctx.strokeStyle = 'rgba(175, 215, 235, 0.3)';
-                    ctx.lineWidth = 1;
-                    for (let i = 0; i < drops.length; i++) {
-                        let drop = drops[i];
-                        ctx.beginPath();
-                        ctx.moveTo(drop.x, drop.y);
-                        ctx.lineTo(drop.x, drop.y + drop.length);
-                        ctx.stroke();
-                        drop.y += drop.speed;
-                        if (drop.y > canvas.height) {
-                            drop.y = -drop.length;
-                            drop.x = Math.random() * canvas.width;
-                        }
-                    }
-                    requestAnimationFrame(drawRain);
-                }
-                drawRain();
-                window.addEventListener('resize', () => {
-                    canvas.width = window.innerWidth;
-                    canvas.height = window.innerHeight;
-                });
-
-                document.getElementById('year').textContent = new Date().getFullYear();
-
-                const gameContainer = document.getElementById('word-game-container');
-                if (gameContainer) {
-                    const wordsToFindContainer = document.getElementById('words-to-find');
-                    const wordCounterEl = document.getElementById('game-word-counter');
-                    const attemptsCounterEl = document.getElementById('game-attempts-counter');
-                    const currentWordDisplay = document.getElementById('current-word-display');
-                    const letterOptionsContainer = document.getElementById('letter-options');
-                    const feedbackContainer = document.getElementById('game-feedback');
-                    const feedbackMessage = document.getElementById('feedback-message');
-                    const feedbackButton = document.getElementById('feedback-button');
-
-const wordList = [
-    'APOYO', 'AMISTAD', 'ESCUCHA', 'FUERZA', 'SALUD', 'BIENESTAR', 'CONFIANZA', 
-    'VALOR', 'RESPETO', 'CUIDADO', 'ANIMO', 'ESPERANZA', 'FAMILIA', 'TERAPIA', 
-    'AYUDA', 'PROGRESO', 'PACIENCIA', 'AMOR', 'VIDA', 'SONRISA', 'ABRAZO', 
-    'CALMA', 'SERENIDAD', 'EQUILIBRIO', 'ARMONIA', 'POSITIVO', 'ADELANTE', 
-    'JUNTOS', 'ACOMPAÑAR', 'SANAR', 'DIALOGO', 'EMPATIA',
-
-    // 100 palabras nuevas relacionadas con bulimia, salud y recuperación
-    'RECUPERAR', 'VOLUNTAD', 'CORAJE', 'ESFUERZO', 'LUZ', 'APRENDIZAJE', 
-    'CUIDARSE', 'ACEPTAR', 'LIBERTAD', 'AUTOESTIMA', 'CRECER', 'VALENTIA', 
-    'TRANQUILIDAD', 'PERDON', 'RENACER', 'PAZ', 'CLARIDAD', 'CONSCIENCIA', 
-    'SINCERIDAD', 'FORTALEZA', 'LOGRO', 'META', 'DESCANSO', 'REFUGIO', 
-    'CONEXION', 'VINCULO', 'RESPIRAR', 'MOTIVACION', 'ALEGRIA', 'SEGURIDAD', 
-    'BALANCE', 'INSPIRACION', 'CUIDARNOS', 'RESPIRACION', 'MEDITACION', 
-    'NUTRICION', 'ENERGIA', 'SINCERO', 'DEDICACION', 'OPTIMISMO', 'PODER', 
-    'SOPORTE', 'HABITOS', 'CREER', 'ESPERAR', 'DECISION', 'VALENTINA', 
-    'DULZURA', 'CERCANIA', 'SALVAR', 'SUPERACION', 'HORIZONTE', 'ILUSION', 
-    'TRANSFORMAR', 'PROTECCION', 'CONSTANCIA', 'DISCIPLINA', 'HUMILDAD', 
-    'SERENAR', 'CREATIVIDAD', 'CONOCER', 'FLEXIBILIDAD', 'SABIDURIA', 
-    'ENTENDIMIENTO', 'ESCAPE', 'LUCHAR', 'OBJETIVO', 'TRIUNFO', 'UNION', 
-    'CONSTRUCCION', 'GRATITUD', 'PROGRESAR', 'MIRADA', 'ESPERAR', 'INICIAR', 
-    'SERENAR', 'ENFOQUE', 'PERSISTENCIA', 'CERCANOS', 'SINCEROS', 'BONDAD', 
-    'RECOMPENSA', 'DESCUBRIR', 'LUCHA', 'HORIZONTES', 'IMAGINAR', 'MERECER', 
-    'HABITAR', 'CONSTRUIR', 'SENTIR', 'EXPRESAR', 'CUIDAR', 'SOSTENER', 
-    'COMPARTIR', 'GUIA', 'ALIVIO', 'APRECIAR', 'MEJORAR', 'CAMBIO', 
-    'RENOVAR', 'ESPERAR', 'PROBAR', 'FUTURO', 'FUERZAS', 'HUMANIDAD', 
-    'REFLEXION', 'ILUMINAR', 'CRECIMIENTO', 'ACTITUD', 'DIGNIDAD', 'PLENITUD', 
-    'ENCONTRAR', 'AVANZAR', 'CAMINAR', 'NUEVO', 'SENTIDO', 'REPOSO'
-];
-
-
-                    let gameWords = [];
-                    let currentWordIndex = 0;
-                    let currentWord = '';
-                    let lettersGuessed = '';
-                    let attemptsLeft = 3;
-
-                    const shuffleArray = (array) => {
-                        for (let i = array.length - 1; i > 0; i--) {
-                            const j = Math.floor(Math.random() * (i + 1));
-                            [array[i], array[j]] = [array[j], array[i]];
-                        }
-                        return array;
-                    };
-
-                    const selectRandomWords = () => {
-                        gameWords = shuffleArray([...wordList]).slice(0, 4);
-                    };
-
-                    const setupNextWord = () => {
-                        if (currentWordIndex >= gameWords.length) {
-                            showFeedback('¡Felicidades!', 'Has encontrado todas las palabras.', 'Jugar de Nuevo', initGame);
-                            return;
-                        }
-                        currentWord = gameWords[currentWordIndex];
-                        lettersGuessed = '';
-                        attemptsLeft = 3;
-                        updateStats();
-                        renderPlaceholders();
-                        renderLetterOptions();
-                    };
-
-                    const updateStats = () => {
-                        wordCounterEl.textContent = `Palabra ${currentWordIndex + 1} / 4`;
-                        attemptsCounterEl.textContent = `Intentos restantes: ${attemptsLeft}`;
-                    };
-
-                    const renderPlaceholders = () => {
-                        currentWordDisplay.innerHTML = '';
-                        currentWord.split('').forEach(() => {
-                            const placeholder = document.createElement('div');
-                            placeholder.className = 'letter-placeholder';
-                            currentWordDisplay.appendChild(placeholder);
-                        });
-                    };
-
-                    const renderLetterOptions = () => {
-                        letterOptionsContainer.innerHTML = '';
-                        const shuffledLetters = shuffleArray([...currentWord]);
-                        shuffledLetters.forEach(letter => {
-                            const button = document.createElement('button');
-                            button.className = 'letter-option bg-surface shadow-md hover:bg-gray-200 font-bold font-display text-2xl w-12 h-12 rounded-lg';
-                            button.textContent = letter;
-                            button.addEventListener('click', () => handleLetterClick(button, letter));
-                            letterOptionsContainer.appendChild(button);
-                        });
-                    };
-
-                    const handleLetterClick = (clickedButton, clickedLetter) => {
-                        if (clickedButton.disabled) return;
-                        const expectedLetter = currentWord[lettersGuessed.length];
-
-                        if (clickedLetter === expectedLetter) {
-                            lettersGuessed += clickedLetter;
-                            clickedButton.classList.add('correct');
-                            clickedButton.disabled = true;
-                            
-                            const placeholder = currentWordDisplay.children[lettersGuessed.length - 1];
-                            placeholder.textContent = clickedLetter;
-                            placeholder.style.borderBottom = '3px solid #22c55e';
-
-                            if (lettersGuessed.length === currentWord.length) {
-                                document.querySelector(`[data-word="${currentWord}"]`).classList.add('found');
-                                setTimeout(() => {
-                                    currentWordIndex++;
-                                    setupNextWord();
-                                }, 1200);
-                            }
-                        } else {
-                            attemptsLeft--;
-                            updateStats();
-                            clickedButton.classList.add('incorrect');
-                            setTimeout(() => clickedButton.classList.remove('incorrect'), 600);
-
-                            if (attemptsLeft <= 0) {
-                                showFeedback('¡Fallaste!', `La palabra era "${currentWord}"`, 'Reintentar', () => {
-                                    feedbackContainer.classList.remove('visible');
-                                    currentWordIndex++; 
-                                    setupNextWord();
-                                });
-                            }
-                        }
-                    };
-                    
-                    const showFeedback = (title, message, buttonText, callback) => {
-                        feedbackMessage.innerHTML = `${title}<br><span class="text-xl text-secondary font-sans font-normal">${message}</span>`;
-                        feedbackButton.textContent = buttonText;
-                        feedbackButton.onclick = () => {
-                            feedbackContainer.classList.remove('visible');
-                            setTimeout(callback, 200);
-                        };
-                        feedbackContainer.classList.add('visible');
-                    };
-                    
-                    const initGame = () => {
-                        currentWordIndex = 0;
-                        selectRandomWords();
-                        
-                        wordsToFindContainer.innerHTML = '';
-                        gameWords.forEach(word => {
-                            const wordEl = document.createElement('span');
-                            wordEl.className = 'word-to-find font-display bg-gray-200 px-3 py-1 rounded-md';
-                            wordEl.textContent = word;
-                            wordEl.dataset.word = word;
-                            wordsToFindContainer.appendChild(wordEl);
-                        });
-                        
-                        feedbackContainer.classList.remove('visible');
-                        setupNextWord();
-                    };
-
-                    initGame();
-                }
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init({ duration: 800, once: true, easing: 'ease-out-cubic' });
+            lucide.createIcons();
+            
+            VANTA.WAVES({
+              el: "#hero",
+              mouseControls: true,
+              touchControls: true,
+              gyroControls: false,
+              minHeight: 200.00,
+              minWidth: 200.00,
+              scale: 1.00,
+              scaleMobile: 1.00,
+              color: 0xb0f19,
+              shininess: 35.00,
+              waveHeight: 15.00,
+              waveSpeed: 0.60,
+              zoom: 0.80
             });
-        </script>
-    </body>
-    </html>	
+
+            const loader = document.getElementById('loader-wrapper');
+            const lofiMusic = document.getElementById('lofi-music');
+            const volumeButton = document.getElementById('volume-button');
+            const volumeSlider = document.getElementById('volume-slider');
+            const setVolumeIcon = (volume) => {
+                let iconName = 'volume-2';
+                if (lofiMusic.muted || volume === 0) iconName = 'volume-x';
+                else if (volume < 0.5) iconName = 'volume-1';
+                volumeButton.innerHTML = `<i data-lucide="${iconName}"></i>`;
+                lucide.createIcons();
+            };
+            const playMusic = () => {
+                lofiMusic.volume = parseFloat(volumeSlider.value);
+                setVolumeIcon(lofiMusic.volume);
+                lofiMusic.play().catch(() => document.body.addEventListener('click', () => lofiMusic.play(), { once: true }));
+            };
+            volumeButton.addEventListener('click', () => { lofiMusic.muted = !lofiMusic.muted; setVolumeIcon(lofiMusic.muted ? 0 : lofiMusic.volume); });
+            volumeSlider.addEventListener('input', (e) => { const v = parseFloat(e.target.value); lofiMusic.volume = v; if (lofiMusic.muted && v > 0) lofiMusic.muted = false; setVolumeIcon(v); });
+            setVolumeIcon(parseFloat(volumeSlider.value));
+            setTimeout(() => { loader.classList.add('hidden'); setTimeout(playMusic, 500); }, 1500);
+
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = mobileMenu.querySelectorAll('a');
+            const toggleMenu = () => {
+                const isOpen = !mobileMenu.classList.contains('hidden');
+                mobileMenu.classList.toggle('hidden');
+                document.body.style.overflow = isOpen ? 'auto' : 'hidden';
+                menuBtn.innerHTML = isOpen ? `<i data-lucide="menu"></i>` : `<i data-lucide="x"></i>`;
+                lucide.createIcons();
+            };
+            menuBtn.addEventListener('click', toggleMenu);
+            navLinks.forEach(link => link.addEventListener('click', () => { if (!mobileMenu.classList.contains('hidden')) toggleMenu(); }));
+            
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 20));
+
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // --- LÓGICA DEL MINIJUEGO (sin cambios) ---
+            const gameContainer = document.getElementById('word-game-container');
+            if (gameContainer) {
+                const wordsToFindContainer = document.getElementById('words-to-find');
+                const wordCounterEl = document.getElementById('game-word-counter');
+                const attemptsCounterEl = document.getElementById('game-attempts-counter');
+                const currentWordDisplay = document.getElementById('current-word-display');
+                const letterOptionsContainer = document.getElementById('letter-options');
+                const feedbackContainer = document.getElementById('game-feedback');
+                const feedbackMessage = document.getElementById('feedback-message');
+                const feedbackButton = document.getElementById('feedback-button');
+                const wordList = ['APOYO', 'ESCUCHA', 'FUERZA', 'SALUD', 'CONFIANZA', 'VALOR', 'RESPETO', 'CUIDADO', 'ESPERANZA', 'TERAPIA', 'AYUDA', 'PACIENCIA', 'AMOR', 'VIDA', 'CALMA', 'EQUILIBRIO', 'ARMONIA', 'SANAR', 'EMPATIA'];
+                let gameWords = [], currentWordIndex = 0, currentWord = '', lettersGuessed = '', attemptsLeft = 3;
+                const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
+                const selectRandomWords = () => { gameWords = shuffleArray([...wordList]).slice(0, 4); };
+                const setupNextWord = () => {
+                    if (currentWordIndex >= gameWords.length) { showFeedback('¡Felicidades!', 'Has encontrado todas las palabras.', 'Jugar de Nuevo', initGame); return; }
+                    currentWord = gameWords[currentWordIndex]; lettersGuessed = ''; attemptsLeft = 3;
+                    updateStats(); renderPlaceholders(); renderLetterOptions();
+                };
+                const updateStats = () => { wordCounterEl.textContent = `Palabra ${currentWordIndex + 1} / 4`; attemptsCounterEl.textContent = `Intentos restantes: ${attemptsLeft}`; };
+                const renderPlaceholders = () => {
+                    currentWordDisplay.innerHTML = '';
+                    currentWord.split('').forEach(() => { const p = document.createElement('div'); p.className = 'letter-placeholder w-10 h-14 flex justify-center items-center border-b-2 border-secondary/50 transition-all duration-300'; currentWordDisplay.appendChild(p); });
+                };
+                const renderLetterOptions = () => {
+                    letterOptionsContainer.innerHTML = '';
+                    shuffleArray([...currentWord]).forEach(letter => {
+                        const btn = document.createElement('button');
+                        btn.className = 'letter-option bg-surface/50 shadow-md hover:bg-surface font-bold font-display text-2xl w-12 h-12 rounded-lg transition-all duration-200';
+                        btn.textContent = letter; btn.addEventListener('click', () => handleLetterClick(btn, letter)); letterOptionsContainer.appendChild(btn);
+                    });
+                };
+                const handleLetterClick = (btn, letter) => {
+                    if (btn.disabled) return;
+                    const expected = currentWord[lettersGuessed.length];
+                    if (letter === expected) {
+                        lettersGuessed += letter; btn.classList.add('correct'); btn.disabled = true;
+                        const p = currentWordDisplay.children[lettersGuessed.length - 1]; 
+                        if (p) {
+                           p.textContent = letter; 
+                           p.style.borderColor = '#22c55e';
+                        }
+                        if (lettersGuessed.length === currentWord.length) {
+                            setTimeout(() => { currentWordIndex++; setupNextWord(); }, 1200);
+                        }
+                    } else {
+                        attemptsLeft--; 
+                        updateStats(); 
+                        btn.classList.add('incorrect'); 
+                        setTimeout(() => btn.classList.remove('incorrect'), 600);
+
+                        if (attemptsLeft >= 0) {
+                            setTimeout(() => {
+                                if (lettersGuessed.length < currentWord.length) {
+                                    const letterToReveal = currentWord[lettersGuessed.length];
+                                    lettersGuessed += letterToReveal;
+
+                                    const placeholder = currentWordDisplay.children[lettersGuessed.length - 1];
+                                    if (placeholder) {
+                                        placeholder.textContent = letterToReveal;
+                                        placeholder.style.borderColor = '#A0AEC0';
+                                        placeholder.style.color = '#A0AEC0';
+                                    }
+
+                                    const letterButtons = letterOptionsContainer.querySelectorAll('button:not(:disabled)');
+                                    for(let letterBtn of letterButtons) {
+                                        if (letterBtn.textContent === letterToReveal) {
+                                            letterBtn.disabled = true;
+                                            letterBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                                            break;
+                                        }
+                                    }
+                                    
+                                    if (lettersGuessed.length === currentWord.length) {
+                                        setTimeout(() => { currentWordIndex++; setupNextWord(); }, 1200);
+                                    }
+                                }
+                            }, 700);
+                        } 
+                        
+                        if (attemptsLeft <= 0) { 
+                            showFeedback('¡Inténtalo de nuevo!', `La palabra era "${currentWord}"`, 'Continuar', () => { currentWordIndex++; setupNextWord(); }); 
+                        }
+                    }
+                };
+                const showFeedback = (title, msg, btnText, cb) => {
+                    feedbackMessage.innerHTML = `${title}<br><span class="text-xl text-secondary font-sans font-normal">${msg}</span>`;
+                    feedbackButton.textContent = btnText;
+                    feedbackButton.onclick = () => { feedbackContainer.classList.remove('visible'); setTimeout(cb, 300); };
+                    feedbackContainer.classList.add('visible');
+                };
+                const initGame = () => {
+                    currentWordIndex = 0; selectRandomWords();
+                    feedbackContainer.classList.remove('visible'); setupNextWord();
+                };
+                initGame();
+            }
+        });
+    </script>
+</body>
+</html>
+
