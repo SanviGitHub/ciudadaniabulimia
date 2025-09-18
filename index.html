@@ -174,7 +174,7 @@
         <section id="hero" class="min-h-screen flex flex-col items-center justify-center text-center p-4 relative overflow-hidden">
             <div class="absolute inset-0 bg-background opacity-50 z-0"></div>
             <div class="container mx-auto px-6 z-10">
-                <h1 class="font-display text-4xl md:text-6xl lg:text-8xl font-extrabold !leading-tight tracking-tighter bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-400" data-aos="fade-up">
+                <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold !leading-tight tracking-tighter bg-clip-text text-transparent bg-gradient-to-br from-white to-gray-400" data-aos="fade-up">
                     Hablemos sobre la Bulimia.
                 </h1>
                 <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-secondary" data-aos="fade-up" data-aos-delay="200">
@@ -198,7 +198,7 @@
 
                 <div class="max-w-4xl mx-auto mt-16 space-y-8 info-section">
                     
-                    <div class="info-card rounded-2xl p-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="info-card rounded-2xl p-6 sm:p-8" data-aos="fade-up" data-aos-delay="100">
                         <h3 class="font-display font-bold text-2xl text-primary mb-4">1. ¿Qué es la bulimia nerviosa?</h3>
                         <div class="text-secondary text-lg leading-relaxed space-y-4">
                             <p>La bulimia nerviosa es un trastorno de la conducta alimentaria grave y potencialmente mortal. A diferencia de la anorexia, las personas con bulimia suelen tener un peso normal o sobrepeso. La característica principal es un ciclo de atracones seguidos de conductas compensatorias.</p>
@@ -209,7 +209,7 @@
                         </div>
                     </div>
                     
-                    <div class="info-card rounded-2xl p-8" data-aos="fade-up" data-aos-delay="200">
+                    <div class="info-card rounded-2xl p-6 sm:p-8" data-aos="fade-up" data-aos-delay="200">
                         <h3 class="font-display font-bold text-2xl text-primary mb-4">2. Causas y factores de riesgo</h3>
                         <div class="text-secondary text-lg leading-relaxed space-y-6">
                             <p>La bulimia nerviosa no surge de una única causa, sino de una compleja interacción de factores psicológicos, biológicos y socioculturales.</p>
@@ -242,7 +242,7 @@
                         </div>
                     </div>
                     
-                    <div class="info-card rounded-2xl p-8" data-aos="fade-up" data-aos-delay="300">
+                    <div class="info-card rounded-2xl p-6 sm:p-8" data-aos="fade-up" data-aos-delay="300">
                         <h3 class="font-display font-bold text-2xl text-primary mb-4">3. Síntomas y señales de alerta</h3>
                          <div class="text-secondary text-lg leading-relaxed space-y-6">
                             <p>La bulimia se manifiesta a través de un ciclo de atracones de comida seguidos de conductas compensatorias (como el vómito o el uso de laxantes).</p>
@@ -264,7 +264,7 @@
                          </div>
                     </div>
 
-                    <div class="info-card rounded-2xl p-8" data-aos="fade-up" data-aos-delay="400">
+                    <div class="info-card rounded-2xl p-6 sm:p-8" data-aos="fade-up" data-aos-delay="400">
                         <h3 class="font-display font-bold text-2xl text-primary mb-4">4. Tratamiento y recuperación</h3>
                         <div class="text-secondary text-lg leading-relaxed space-y-4">
                             <p>El tratamiento es integral y aborda las causas de fondo, no solo la comida. La recuperación es posible.</p>
@@ -307,7 +307,7 @@
             <div class="container mx-auto px-6" data-aos="zoom-in">
                 <div class="max-w-4xl mx-auto">
                     <blockquote class="text-center">
-                        <p class="text-xl md:text-3xl font-medium text-primary leading-relaxed">
+                        <p class="text-xl md:text-2xl lg:text-3xl font-medium text-primary leading-relaxed">
                             “Hablar de lo que me pasaba fue lo más difícil, pero también lo que me salvó. Pedir ayuda no es de débiles, es de valientes. La recuperación es un camino, pero es posible.”
                         </p>
                         <footer class="mt-8">
@@ -356,7 +356,7 @@
               minHeight: 200.00,
               minWidth: 200.00,
               scale: 1.00,
-              scaleMobile: 1.00,
+              scaleMobile: 0.75, // Optimizado para móviles
               color: 0xb0f19,
               shininess: 35.00,
               waveHeight: 15.00,
@@ -403,10 +403,9 @@
 
             document.getElementById('year').textContent = new Date().getFullYear();
 
-            // --- LÓGICA DEL MINIJUEGO (sin cambios) ---
+            // --- LÓGICA DEL MINIJUEGO ---
             const gameContainer = document.getElementById('word-game-container');
             if (gameContainer) {
-                const wordsToFindContainer = document.getElementById('words-to-find');
                 const wordCounterEl = document.getElementById('game-word-counter');
                 const attemptsCounterEl = document.getElementById('game-attempts-counter');
                 const currentWordDisplay = document.getElementById('current-word-display');
@@ -426,13 +425,13 @@
                 const updateStats = () => { wordCounterEl.textContent = `Palabra ${currentWordIndex + 1} / 4`; attemptsCounterEl.textContent = `Intentos restantes: ${attemptsLeft}`; };
                 const renderPlaceholders = () => {
                     currentWordDisplay.innerHTML = '';
-                    currentWord.split('').forEach(() => { const p = document.createElement('div'); p.className = 'letter-placeholder w-10 h-14 flex justify-center items-center border-b-2 border-secondary/50 transition-all duration-300'; currentWordDisplay.appendChild(p); });
+                    currentWord.split('').forEach(() => { const p = document.createElement('div'); p.className = 'letter-placeholder w-8 h-12 sm:w-10 sm:h-14 flex justify-center items-center border-b-2 border-secondary/50 transition-all duration-300'; currentWordDisplay.appendChild(p); });
                 };
                 const renderLetterOptions = () => {
                     letterOptionsContainer.innerHTML = '';
                     shuffleArray([...currentWord]).forEach(letter => {
                         const btn = document.createElement('button');
-                        btn.className = 'letter-option bg-surface/50 shadow-md hover:bg-surface font-bold font-display text-2xl w-12 h-12 rounded-lg transition-all duration-200';
+                        btn.className = 'letter-option bg-surface/50 shadow-md hover:bg-surface font-bold font-display text-xl sm:text-2xl w-10 h-10 sm:w-12 sm:h-12 rounded-lg transition-all duration-200';
                         btn.textContent = letter; btn.addEventListener('click', () => handleLetterClick(btn, letter)); letterOptionsContainer.appendChild(btn);
                     });
                 };
@@ -445,6 +444,7 @@
                         if (p) {
                            p.textContent = letter; 
                            p.style.borderColor = '#22c55e';
+                           p.style.color = '#F7FAFC';
                         }
                         if (lettersGuessed.length === currentWord.length) {
                             setTimeout(() => { currentWordIndex++; setupNextWord(); }, 1200);
@@ -460,14 +460,12 @@
                                 if (lettersGuessed.length < currentWord.length) {
                                     const letterToReveal = currentWord[lettersGuessed.length];
                                     lettersGuessed += letterToReveal;
-
                                     const placeholder = currentWordDisplay.children[lettersGuessed.length - 1];
                                     if (placeholder) {
                                         placeholder.textContent = letterToReveal;
                                         placeholder.style.borderColor = '#A0AEC0';
                                         placeholder.style.color = '#A0AEC0';
                                     }
-
                                     const letterButtons = letterOptionsContainer.querySelectorAll('button:not(:disabled)');
                                     for(let letterBtn of letterButtons) {
                                         if (letterBtn.textContent === letterToReveal) {
@@ -476,7 +474,6 @@
                                             break;
                                         }
                                     }
-                                    
                                     if (lettersGuessed.length === currentWord.length) {
                                         setTimeout(() => { currentWordIndex++; setupNextWord(); }, 1200);
                                     }
