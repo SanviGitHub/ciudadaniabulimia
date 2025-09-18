@@ -142,7 +142,7 @@
             <div class="loader-ripple"></div>
         </div>
         <audio id="lofi-music" loop>
-            <source src="https://github.com/sanvy-stack/hablemos-de-bulimia/raw/main/music.mp3" type="audio/mpeg">
+            <source src="music.mp3" type="audio/mp3">
         </audio>
     </div>
 
@@ -249,7 +249,7 @@
                         <h3 class="font-display font-bold text-2xl text-primary mb-4">3. Síntomas y señales de alerta</h3>
                          <div class="text-secondary text-lg leading-relaxed space-y-6">
                             <p>La bulimia se manifiesta a través de un ciclo de atracones de comida seguidos de conductas compensatorias (como el vómito o el uso de laxantes).</p>
-                            <img src="https://images.unsplash.com/photo-1502823552013-529a63e9a4a4?q=80&w=1287&auto=format&fit=crop" alt="Infografía sobre señales de alerta de los Trastornos de la Conducta Alimentaria" class="rounded-lg shadow-xl w-full h-auto object-cover aspect-video my-4">
+                            <img src="tca.png" alt="Silueta de una persona pidiendo ayuda al atardecer" class="rounded-lg shadow-xl w-full h-auto object-cover aspect-video my-4">
                             <div class="grid md:grid-cols-3 gap-6 text-left">
                                 <div>
                                     <h4 class="mb-2">Comportamiento</h4>
@@ -351,6 +351,7 @@
             AOS.init({ duration: 800, once: true, easing: 'ease-out-cubic' });
             lucide.createIcons();
             
+            // Optimización: Solo ejecutar la animación Vanta.js en escritorio para no sobrecargar móviles.
             if (window.innerWidth > 768) {
                 VANTA.WAVES({
                   el: "#hero",
@@ -362,9 +363,10 @@
                   scale: 1.00,
                   scaleMobile: 1.00,
                   color: 0xb0f19,
-                  shininess: 35.00,
-                  waveHeight: 15.00,
-                  waveSpeed: 0.60,
+                  // Parámetros reducidos para mejor rendimiento
+                  shininess: 20.00, 
+                  waveHeight: 12.00,
+                  waveSpeed: 0.50,
                   zoom: 0.80
                 });
             } else {
@@ -408,7 +410,26 @@
             navLinks.forEach(link => link.addEventListener('click', () => { if (!mobileMenu.classList.contains('hidden')) toggleMenu(); }));
             
             const header = document.getElementById('header');
-            window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 20));
+            
+            // Optimización: Throttle para el evento de scroll y evitar ejecuciones excesivas.
+            const throttle = (func, limit) => {
+                let inThrottle;
+                return function() {
+                    const args = arguments;
+                    const context = this;
+                    if (!inThrottle) {
+                        func.apply(context, args);
+                        inThrottle = true;
+                        setTimeout(() => inThrottle = false, limit);
+                    }
+                }
+            };
+            
+            const handleScroll = () => {
+                header.classList.toggle('scrolled', window.scrollY > 20);
+            };
+            
+            window.addEventListener('scroll', throttle(handleScroll, 100));
 
             document.getElementById('year').textContent = new Date().getFullYear();
 
